@@ -167,7 +167,7 @@ export function Breadcrumbs({ cluster, sub }: { cluster: string; sub?: string })
 export function ClusterShell({ children }: { children: ReactNode }) {
   const { cluster = "", sub } = useParams();
   return (
-    <div className="min-h-screen bg-paper text-ink flex flex-col">
+    <div className="min-h-screen bg-paper text-foreground flex flex-col">
       <SiteNav />
       <SidebarProvider>
         <div className="flex w-full pt-16 min-h-[calc(100vh-4rem)]">
