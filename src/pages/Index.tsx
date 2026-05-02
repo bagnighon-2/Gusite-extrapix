@@ -246,7 +246,7 @@ const Index = () => {
       </section>
 
       {/* FEATURED HIGHLIGHTS BENTO — cosmos bg + dot field + drifting notebook */}
-      <section className="relative py-14 md:py-20 overflow-hidden dots-fine">
+      <section className="relative py-14 md:py-20 overflow-hidden dots-fine tx-oil tx-bokeh tx-film-grain">
         <img
           src={textureCosmos}
           alt=""
