@@ -129,7 +129,7 @@ export function BentoCard({ item }: { item: BentoItem }) {
           <div>
             <h3
               className={`font-display leading-tight transition-colors duration-300 ${
-                size === "xl" || size === "lg" ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
+                size === "xl" || size === "lg" ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
               } ${hasImage ? "text-paper-contrast" : "text-ink group-hover:text-gold"}`}
             >
               {item.title}
