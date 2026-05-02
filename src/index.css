@@ -462,7 +462,8 @@
     background: hsl(38 40% 96%) !important;
     color: hsl(220 60% 9%) !important;
     border-color: hsl(var(--gold)) !important;
-    box-shadow: 0 30px 90px -25px hsl(220 60% 4% / 0.9), 0 0 0 1px hsl(var(--gold) / 0.45) !important;
+    outline: 1px solid hsl(38 40% 96% / 0.86);
+    box-shadow: 0 34px 120px -22px hsl(220 60% 4% / 0.98), 0 0 0 1px hsl(var(--gold) / 0.62), 0 0 0 9999px hsl(222 65% 6% / 0.42) !important;
   }
 
   .visible-popup-panel .text-ink { color: hsl(220 60% 9%) !important; }
