@@ -125,6 +125,17 @@
     color: hsl(var(--paper-contrast-soft));
   }
 
+  .dark .text-paper,
+  .dark .text-navy,
+  .dark .text-navy-deep {
+    color: hsl(var(--paper-contrast));
+  }
+
+  .dark .text-paper\/80 { color: hsl(var(--paper-contrast) / 0.8); }
+  .dark .text-paper\/70 { color: hsl(var(--paper-contrast) / 0.7); }
+  .dark .text-paper\/60 { color: hsl(var(--paper-contrast) / 0.6); }
+  .dark .text-paper\/50 { color: hsl(var(--paper-contrast) / 0.5); }
+
 }
 
 @layer base {
