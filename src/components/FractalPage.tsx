@@ -1,13 +1,16 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import {
   ArrowUpRight, FileText, Image as ImgIcon, Sparkles, Quote, Link2, BookOpen,
+  Mail, Linkedin, Github, Send, MapPin,
 } from "lucide-react";
 import { ClusterShell } from "./ClusterShell";
 import { PullQuote, Marginalia } from "./Editorial";
 import { Bento, type BentoItem } from "./Bento";
 import { CLUSTERS, findCluster, type Cluster, type Subpage } from "@/data/clusters";
 import heroFallback from "@/assets/atmos-notebook.jpg";
+import heroPortrait from "@/assets/hero-portrait.jpg";
+import { toast } from "@/hooks/use-toast";
 
 function SubpageHeader({ kicker, num, title, lede }: { kicker: string; num: string; title: string; lede?: string }) {
   return (
