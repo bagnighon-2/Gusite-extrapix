@@ -355,7 +355,7 @@
     pointer-events: none;
     background-image: repeating-linear-gradient(0deg, hsl(var(--ink) / 0.04) 0px, hsl(var(--ink) / 0.04) 1px, transparent 1px, transparent 4px);
     mix-blend-mode: multiply;
-    opacity: 0.55;
+    opacity: 0.3;
   }
 
   /* Vintage film grain — finer & warmer than .grain */
