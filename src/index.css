@@ -590,7 +590,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.14;
+    opacity: 0.08;
     mix-blend-mode: multiply;
     background:
       radial-gradient(80% 60% at 20% 25%, hsl(38 55% 78% / 0.35), transparent 70%),
