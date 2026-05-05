@@ -1,15 +1,11 @@
 import { NavLink, Link } from "react-router-dom";
 import { forwardRef, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { CLUSTERS, PROOF_CLUSTER } from "@/data/clusters";
+import { CLUSTERS } from "@/data/clusters";
 import { ThemeToggle } from "./ThemeToggle";
 
 const topLinks = [
-  { to: "/", label: "Home (Editorial)", num: "00" },
-  { to: "/dashboard", label: "Dashboard", num: "✦✦" },
-];
-const footerLinks = [
-  { to: `/${PROOF_CLUSTER.slug}`, label: PROOF_CLUSTER.label, num: PROOF_CLUSTER.num },
+  { to: "/", label: "Home", num: "00" },
 ];
 
 export const SiteNav = () => {

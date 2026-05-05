@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  User, GraduationCap, Wand2, FileText, Mail, Sparkles,
+  User, GraduationCap, Wand2, FileText, Mail,
 } from "lucide-react";
 
 export type Subpage = {
