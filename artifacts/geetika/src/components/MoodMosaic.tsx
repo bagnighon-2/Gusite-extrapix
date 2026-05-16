@@ -196,6 +196,17 @@ export function MoodMosaic({ topics }: { topics: TopicData[] }) {
           if (splitIndex >= 0 && index === splitIndex + 1) {
             return null;
           }
+          if (index === 35) {
+            return (
+              <MosaicTile
+                key={topic.slug}
+                topic={topic}
+                index={index}
+                span="col-span-2 row-span-1"
+                tint={CELL_TINTS[index % CELL_TINTS.length]}
+              />
+            );
+          }
           return (
             <MosaicTile
               key={topic.slug}
