@@ -1,39 +1,9 @@
 import { useState } from "react";
-import { X, Play, ExternalLink } from "lucide-react";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Play, X } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import type { TopicData } from "@/data/clusters";
 
-const SPANS = [
-  "col-span-2 row-span-2",
-  "col-span-1 row-span-1",
-  "col-span-1 row-span-1",
-  "col-span-2 row-span-1",
-  "col-span-1 row-span-2",
-  "col-span-1 row-span-1",
-  "col-span-2 row-span-1",
-  "col-span-1 row-span-1",
-  "col-span-2 row-span-2",
-  "col-span-1 row-span-1",
-  "col-span-1 row-span-1",
-  "col-span-2 row-span-1",
-];
-
-const TINTS = [
-  "from-gold/15 via-paper to-paper",
-  "from-paper via-paper to-navy-deep/10",
-  "from-navy-deep/10 via-paper to-gold/10",
-  "from-paper-deep via-paper to-paper",
-  "from-gold/20 via-paper-deep to-paper",
-  "from-paper via-gold/10 to-paper-deep",
-  "from-navy-deep/8 via-gold/8 to-paper",
-  "from-paper-deep via-navy-deep/5 to-paper",
-  "from-gold/12 via-paper to-navy-deep/8",
-  "from-paper via-paper-deep to-gold/8",
-  "from-gold/18 via-paper to-paper",
-  "from-paper-deep via-gold/5 to-paper",
-];
-
-const LAYOUTS = {
+const CELL_LAYOUTS = {
   mobile: [
     "col-span-2 row-span-2",
     "col-span-1 row-span-1",
@@ -54,12 +24,12 @@ const LAYOUTS = {
   ],
   lg: [
     "col-span-2 row-span-2",
-    "col-span-1 row-span-1",
+    "col-span-2 row-span-1",
     "col-span-1 row-span-2",
+    "col-span-1 row-span-1",
     "col-span-2 row-span-1",
     "col-span-1 row-span-1",
     "col-span-2 row-span-2",
-    "col-span-1 row-span-1",
     "col-span-1 row-span-1",
     "col-span-2 row-span-1",
     "col-span-1 row-span-2",
@@ -68,109 +38,90 @@ const LAYOUTS = {
   ],
 } as const;
 
-function YouTubeEmbed({ src, caption }: { src: string; caption?: string }) {
+const CELL_TINTS = [
+  "from-gold/20 via-paper to-paper",
+  "from-paper via-paper-deep to-navy-deep/10",
+  "from-navy-deep/10 via-paper to-gold/10",
+  "from-paper-deep via-paper to-paper",
+  "from-gold/15 via-paper-deep to-paper",
+  "from-paper via-gold/10 to-paper-deep",
+  "from-navy-deep/8 via-gold/8 to-paper",
+  "from-paper-deep via-navy-deep/5 to-paper",
+  "from-gold/12 via-paper to-navy-deep/8",
+  "from-paper via-paper-deep to-gold/8",
+  "from-gold/18 via-paper to-paper",
+  "from-paper-deep via-gold/5 to-paper",
+] as const;
+
+function MediaFrame({ topic }: { topic: TopicData }) {
+  if (topic.embed?.type === "youtube") {
+    return (
+      <iframe
+        src={topic.embed.src}
+        title={topic.embed.caption ?? topic.label}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    );
+  }
+  if (topic.embed?.type === "image") {
+    return <img src={topic.embed.src} alt={topic.embed.caption ?? topic.label} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />;
+  }
   return (
-    <div className="mt-6">
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-navy-deep">
-        <iframe
-          src={src}
-          title={caption ?? "Embedded video"}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0 w-full h-full"
-        />
-      </div>
-      {caption && (
-        <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-widest text-ink-soft">{caption}</p>
-      )}
+    <div className="absolute inset-0 bg-gradient-to-br from-paper via-paper-deep to-gold/10">
+      <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.5),transparent_35%),radial-gradient(circle_at_80%_30%,rgba(201,161,66,0.15),transparent_30%),radial-gradient(circle_at_50%_80%,rgba(17,24,39,0.1),transparent_40%)]" />
     </div>
   );
 }
 
-function ImageEmbed({ src, caption }: { src: string; caption?: string }) {
-  return (
-    <div className="mt-6">
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-border bg-paper-deep">
-        <img
-          src={src}
-          alt={caption ?? "Embedded image"}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      {caption && (
-        <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-widest text-ink-soft">{caption}</p>
-      )}
-    </div>
-  );
-}
-
-function MosaicBox({ topic, span, tint }: { topic: TopicData; span: string; tint: string }) {
+function MosaicTile({ topic, span, tint, index }: { topic: TopicData; span: string; tint: string; index: number }) {
   const [open, setOpen] = useState(false);
-  const isLarge = span.includes("row-span-2") && span.includes("col-span-2");
-
+  const hasMedia = !!topic.embed;
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={[
-          `group relative ${span} min-h-[120px] overflow-hidden border border-border`,
-          `bg-gradient-to-br ${tint}`,
-          "fancy-tile",
-          "transition-all duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-          "hover:border-gold hover:-translate-y-1 hover:scale-[1.015] hover:z-10",
-          "cursor-pointer text-left",
-        ].join(" ")}
+        className={`group relative ${span} overflow-hidden border border-border bg-paper text-left fancy-tile`}
       >
-        <span className="absolute inset-0 ring-1 ring-inset ring-paper/20 mix-blend-overlay pointer-events-none z-0" />
-        <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end z-[1]">
-          <h3
-            className={`font-display text-ink leading-tight transition-colors duration-300 group-hover:text-gold ${
-              isLarge ? "text-2xl md:text-3xl" : "text-lg md:text-xl"
-            }`}
-          >
-            {topic.label}
-          </h3>
-          {isLarge && topic.blurb && (
-            <p className="mt-2 text-sm text-ink-soft leading-relaxed line-clamp-2">
-              {topic.blurb}
-            </p>
-          )}
+        <div className={`absolute inset-0 bg-gradient-to-br ${tint}`} />
+        <div className="absolute inset-0">
+          <MediaFrame topic={topic} />
         </div>
-        {topic.embed?.type === "youtube" && (
-          <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-navy-deep/60 flex items-center justify-center z-[3]">
-            <Play className="w-3 h-3 text-paper fill-paper" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/75 via-navy-deep/20 to-transparent" />
+        <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between">
+          <div className="flex items-start justify-between gap-3">
+            <span className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-paper/80">{String(index + 1).padStart(2, "0")}</span>
+            {hasMedia && (
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-paper/15 text-paper border border-paper/20">
+                {topic.embed?.type === "youtube" ? <Play className="h-3.5 w-3.5 fill-paper" /> : <X className="h-3.5 w-3.5 opacity-0" />}
+              </span>
+            )}
           </div>
-        )}
+          <div className="space-y-2">
+            <h3 className={`font-display leading-tight text-paper ${span.includes("row-span-2") ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"}`}>{topic.label}</h3>
+            <p className="max-w-md font-display italic text-sm md:text-base leading-relaxed text-paper/80 line-clamp-3">{topic.blurb}</p>
+          </div>
+        </div>
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-3xl bg-paper p-0 overflow-hidden">
-          <div className="p-7 md:p-10">
-            <DialogTitle className="font-display text-2xl md:text-4xl text-ink leading-tight pr-8">
-              {topic.label}
-            </DialogTitle>
-            {topic.blurb && (
-              <p className="mt-2 text-ink-soft text-sm font-mono uppercase tracking-widest">
-                {topic.blurb}
-              </p>
-            )}
-            <div className="rule-gold my-6" />
-            <DialogDescription asChild>
-              <div className="text-ink-soft text-base md:text-lg leading-relaxed font-display">
-                {topic.detail.split("\n").map((p, i) => (
-                  <p key={i} className={i > 0 ? "mt-4" : ""}>{p}</p>
-                ))}
-              </div>
-            </DialogDescription>
-
-            {topic.embed?.type === "youtube" && (
-              <YouTubeEmbed src={topic.embed.src} caption={topic.embed.caption} />
-            )}
-            {topic.embed?.type === "image" && (
-              <ImageEmbed src={topic.embed.src} caption={topic.embed.caption} />
-            )}
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-paper">
+          <div className="grid md:grid-cols-[1.1fr,0.9fr]">
+            <div className="relative min-h-[280px] md:min-h-[520px] overflow-hidden bg-navy-deep">
+              <MediaFrame topic={topic} />
+            </div>
+            <div className="p-7 md:p-10">
+              <DialogTitle className="font-display text-3xl md:text-5xl leading-tight text-ink">{topic.label}</DialogTitle>
+              <DialogDescription asChild>
+                <div className="mt-4 text-base md:text-lg leading-relaxed text-ink-soft font-display">
+                  {topic.detail.split("\n").map((p, i) => (
+                    <p key={i} className={i > 0 ? "mt-4" : ""}>{p}</p>
+                  ))}
+                </div>
+              </DialogDescription>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
@@ -179,16 +130,16 @@ function MosaicBox({ topic, span, tint }: { topic: TopicData; span: string; tint
 }
 
 export function MoodMosaic({ topics }: { topics: TopicData[] }) {
-  const spans = LAYOUTS.lg;
   return (
-    <section className="px-4 md:px-12 pb-16">
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[110px] md:auto-rows-[130px] gap-3 md:gap-4 [grid-auto-flow:dense] content-start">
-        {topics.map((t, i) => (
-          <MosaicBox
-            key={t.slug}
-            topic={t}
-            span={spans[i % spans.length]}
-            tint={TINTS[i % TINTS.length]}
+    <section className="px-4 md:px-12 pb-16 overflow-hidden">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[140px] md:auto-rows-[170px] lg:auto-rows-[190px] gap-4 md:gap-5 lg:gap-6 [grid-auto-flow:dense]">
+        {topics.map((topic, index) => (
+          <MosaicTile
+            key={topic.slug}
+            topic={topic}
+            index={index}
+            span={CELL_LAYOUTS.lg[index % CELL_LAYOUTS.lg.length]}
+            tint={CELL_TINTS[index % CELL_TINTS.length]}
           />
         ))}
       </div>
