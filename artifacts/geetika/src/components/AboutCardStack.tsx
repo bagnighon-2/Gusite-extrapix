@@ -173,7 +173,7 @@ function TopicCard({
           willChange: "transform, opacity",
           background: bg,
           border: `1px solid ${hovered && isInteractive ? accent + "bb" : accent + "30"}`,
-          borderRadius: "4px",
+          borderRadius: "28px",
           overflow: "hidden",
           transition: "border-color 0.4s ease, box-shadow 0.4s ease",
           boxShadow: isInteractive && hovered
