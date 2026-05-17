@@ -12,7 +12,7 @@ const PAGE_LABELS: Record<string, string> = {
   "/about": "About",
   "/academics": "Academics",
   "/works": "Works",
-  "/vault": "Vault",
+  "/vault": "CV & Resume",
   "/contact": "Contact",
   "/dashboard": "Pages",
 };
@@ -29,8 +29,9 @@ const DRIP_SVG_ELLIPSES = [
 export function PageTransition() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const lastPath = useRef(pathname);
-  const [phase, setPhase] = useState<Phase>("idle");
+  const lastPath = useRef<string | null>(null);
+  const [phase, setPhase] = useState<Phase>("dripping");
+  const [firstRender, setFirstRender] = useState(true);
   const [destLabel, setDestLabel] = useState("");
   const [isHomeDest, setIsHomeDest] = useState(false);
   const [shrinkLabel, setShrinkLabel] = useState(false);
@@ -67,10 +68,33 @@ export function PageTransition() {
   }, []);
 
   useEffect(() => {
+    if (firstRender) {
+      const label =
+        PAGE_LABELS[pathname] ??
+        (pathname.replace("/", "").replace(/^\w/, (c) => c.toUpperCase()) || "Home");
+      setDestLabel(label);
+      setIsHomeDest(pathname === "/");
+      setShrinkLabel(false);
+      setPhase("dripping");
+      timers.current = [
+        window.setTimeout(() => setPhase("covered"), DRIP_TIME),
+        window.setTimeout(() => {
+          lastPath.current = pathname;
+          setShrinkLabel(true);
+          setPhase("lifting");
+        }, DRIP_TIME + HOLD_TIME),
+        window.setTimeout(() => {
+          setPhase("idle");
+          setShrinkLabel(false);
+          setFirstRender(false);
+        }, DRIP_TIME + HOLD_TIME + LIFT_TIME),
+      ];
+      return () => timers.current.forEach(window.clearTimeout);
+    }
     if (pathname === lastPath.current) return;
     runTransition(pathname, false);
     return () => timers.current.forEach(window.clearTimeout);
-  }, [pathname, runTransition]);
+  }, [pathname, runTransition, firstRender]);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -93,11 +117,13 @@ export function PageTransition() {
     : phase === "covered" ? 0
     : -112;
 
+  const panelOpacity = phase === "lifting" ? 0 : 1;
+
   const panelTransition =
     phase === "dripping"
-      ? `transform ${DRIP_TIME}ms cubic-bezier(0.62, 0, 0.98, 0.78)`
+      ? `transform ${DRIP_TIME}ms cubic-bezier(0.62, 0, 0.98, 0.78), opacity ${DRIP_TIME * 0.4}ms ease`
       : phase === "lifting"
-      ? `transform ${LIFT_TIME}ms cubic-bezier(0.14, 0, 0.28, 1.22)`
+      ? `transform ${LIFT_TIME}ms cubic-bezier(0.14, 0, 0.28, 1.22), opacity ${Math.round(LIFT_TIME * 0.75)}ms ease ${Math.round(LIFT_TIME * 0.15)}ms`
       : "none";
 
   const labelOpacity = phase === "covered" && !shrinkLabel ? 1 : 0;
@@ -143,8 +169,9 @@ export function PageTransition() {
               position: "absolute",
               inset: 0,
               transform: `translateY(${panelTranslateY}%)`,
+              opacity: panelOpacity,
               transition: panelTransition,
-              willChange: "transform",
+              willChange: "transform, opacity",
             }}
           >
             <div

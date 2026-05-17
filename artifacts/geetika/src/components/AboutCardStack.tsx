@@ -14,8 +14,8 @@ function easeOut(t: number) { return 1 - Math.pow(1 - clamp(t, 0, 1), 3); }
 function easeInOut(t: number) { const c = clamp(t, 0, 1); return c < 0.5 ? 2 * c * c : 1 - Math.pow(-2 * c + 2, 2) / 2; }
 
 const EXPAND_END = 0.12;
-const ESSAY_END = 0.68;
-const BUFFER_END = 0.80;
+const ESSAY_END = 0.72;
+const BUFFER_END = 0.78;
 
 const LIGHTBOX_CARDS = [
   {

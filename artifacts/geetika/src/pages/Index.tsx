@@ -320,7 +320,7 @@ const Index = () => {
               to="/works#karate"
               className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-ink-soft hover:text-gold transition-colors flex items-center gap-2 group"
             >
-              Open the full vault
+              Open the CV &amp; Resume archive
               <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
@@ -353,7 +353,7 @@ const Index = () => {
               </h2>
               <p className="mt-4 max-w-xl text-ink-soft text-sm leading-relaxed font-accent italic">
                 The whole site lives across five pages — about, academics & research,
-                the merged works, the document vault, and a way to reach me. No grand
+                the merged works, the CV &amp; Resume archive, and a way to reach me. No grand
                 groupings, no fractal cul-de-sacs. Just five doors.
               </p>
             </div>

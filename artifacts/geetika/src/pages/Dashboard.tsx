@@ -52,7 +52,7 @@ const Dashboard = () => {
                   </div>
                   <p className="mt-8 max-w-sm text-sm md:text-base text-ink-soft leading-relaxed font-accent italic">
                     {page.slug === "vault"
-                      ? "Open the CV, résumé, and document archive in one place."
+                      ? "Open the CV & Résumé page."
                       : page.slug === "contact"
                         ? "Reach me by email and open the external profiles."
                         : `Go straight into ${page.accent.toLowerCase()} and the full section.`}
@@ -83,7 +83,7 @@ const Dashboard = () => {
                         </div>
                         <div className="rule-gold opacity-60" />
                         <div className="space-y-2 text-ink-soft text-sm leading-relaxed">
-                          <p>{page.slug === "about" ? "Identity, languages, timeline, and the through-line of the whole dossier." : page.slug === "academics" ? "Education, physics, awards, growth notes, and research interests." : page.slug === "works" ? "Robotics, writing, music, screen, design, art, leadership, and sports." : page.slug === "vault" ? "Large CV box, PDF embeds, downloads, and document receipts." : "Email, LinkedIn, GitHub, and a direct path to get in touch."}</p>
+                          <p>{page.slug === "about" ? "Identity, languages, timeline, and the through-line of the whole dossier." : page.slug === "academics" ? "Education, physics, awards, growth notes, and research interests." : page.slug === "works" ? "Robotics, writing, music, screen, design, art, leadership, and sports." : page.slug === "vault" ? "CV & Résumé, PDF embeds, downloads, and document receipts." : "Email, LinkedIn, GitHub, and a direct path to get in touch."}</p>
                         </div>
                       </div>
                     </div>

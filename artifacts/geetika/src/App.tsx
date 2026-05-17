@@ -8,7 +8,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import About from "./pages/About.tsx";
 import Academics from "./pages/Academics.tsx";
 import Works from "./pages/Works.tsx";
-import Vault from "./pages/Vault.tsx";
+import CVResume from "./pages/Vault.tsx";
 import Contact from "./pages/Contact.tsx";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { PageTransition } from "./components/PageTransition";
@@ -31,7 +31,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/academics" element={<Academics />} />
           <Route path="/works" element={<Works />} />
-          <Route path="/vault" element={<Vault />} />
+          <Route path="/vault" element={<CVResume />} />
           <Route path="/contact" element={<Contact />} />
           {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
             <Route key={from} path={from} element={<Navigate to={to} replace />} />

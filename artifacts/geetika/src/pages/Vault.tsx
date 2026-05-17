@@ -13,7 +13,7 @@ type IconCmp = React.ComponentType<{ className?: string }>;
 
 const CV_PDF_URL = "https://www.guelphhumber.ca/sites/default/files/page_files/Sample_CV-new2.pdf";
 
-const Vault = () => {
+const CVResume = () => {
   useReveal();
 
   return (
@@ -44,7 +44,7 @@ const Vault = () => {
       <section className="pb-6">
         <div className="container mb-5">
           <div className="flex items-baseline gap-4">
-            <span className="font-mono text-[0.6rem] tracking-[0.3em] text-gold">Vault Records</span>
+            <span className="font-mono text-[0.6rem] tracking-[0.3em] text-gold">CV &amp; Resume Records</span>
             <span className="flex-1 h-px bg-border/40" />
           </div>
         </div>
@@ -394,4 +394,4 @@ function CVEntry({ icon: Icon, role, date, org, place, desc }: { icon: IconCmp; 
   );
 }
 
-export default Vault;
+export default CVResume;
