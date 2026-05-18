@@ -29,16 +29,15 @@ function TopicCard({ topic, index, total }: { topic: TopicData; index: number; t
 
   return (
     <>
-      <div style={{ height: "100vh", position: "relative" }}>
+      <div style={{ position: "relative" }}>
         <div className="sticky top-0 flex items-center justify-center" style={{ height: "100vh", zIndex: index + 1 }}>
           <div
             onClick={() => setOpen(true)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            className="relative overflow-hidden cursor-pointer select-none"
+            className="relative overflow-hidden cursor-pointer select-none w-full"
             style={{
-              width: "calc(100vw - 7rem)",
-              maxWidth: "1120px",
+              width: "100%",
               height: "calc(100vh - 9rem)",
               background: bg,
               border: `1px solid ${hovered ? `${accent}66` : `${accent}24`}`,
@@ -80,7 +79,7 @@ function TopicCard({ topic, index, total }: { topic: TopicData; index: number; t
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl bg-[hsl(220_30%_8%)] border border-border text-paper p-0 overflow-hidden">
+        <DialogContent className="max-w-3xl bg-[hsl(220_30%_8%)] border border-border text-paper p-0 overflow-hidden">
           <div className="p-8 md:p-10">
             <div className="flex items-center gap-3 mb-6">
               <span className="font-mono uppercase tracking-[0.3em] text-gold/60" style={{ fontSize: "9px" }}>§ 01 · {numLabel}</span>
@@ -104,5 +103,20 @@ function TopicCard({ topic, index, total }: { topic: TopicData; index: number; t
 }
 
 export function StackingTopicCards({ topics }: { topics: TopicData[] }) {
-  return <div>{topics.map((topic, i) => <TopicCard key={topic.slug} topic={topic} index={i} total={topics.length} />)}</div>;
+  return (
+    <div className="flex flex-wrap gap-4 md:gap-5">
+      {topics.map((topic, i) => {
+        const pattern = i % 5;
+        const basisClass = pattern < 2 ? "basis-full md:basis-[calc(50%-0.625rem)]" : "basis-full md:basis-[calc(33.333%-0.89rem)]";
+        return (
+          <div key={topic.slug} className={`${basisClass} min-w-0`}>
+            <TopicCard topic={topic} index={i} total={topics.length} />
+          </div>
+        );
+      })}
+      <div className="basis-full md:basis-[calc(50%-0.625rem)] min-w-0 flex items-center justify-center py-10">
+        <span className="font-serif text-4xl md:text-5xl text-gold/55 tracking-[0.16em]">...</span>
+      </div>
+    </div>
+  );
 }
