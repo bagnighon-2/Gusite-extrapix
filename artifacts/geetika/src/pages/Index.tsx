@@ -15,38 +15,67 @@ import texturePaper from "@/assets/texture-paper.jpg";
 import atmosTelescope from "@/assets/atmos-telescope.jpg";
 import atmosNotebook from "@/assets/atmos-notebook.jpg";
 import atmosMusic from "@/assets/atmos-music.jpg";
+// Hero slideshow — fashion / modelling photos
+import slideGarden from "@assets/unnamed_1779118479483.jpg";
+import slidePinkBlue from "@assets/unnamed_1779118456324.jpg";
+import slideCreamGold from "@assets/unnamed_1779118459816.jpg";
+import slideBlueOutdoor from "@assets/unnamed_1779118420608.jpg";
+import slideGreenTeal from "@assets/unnamed_1779118473437.jpg";
+import slideYellowJacket from "@assets/unnamed_1779118416014.jpg";
+// Triptych — more fashion photos
+import triGreenSit from "@assets/unnamed_1779118401963.jpg";
+import triGreenWide from "@assets/unnamed_1779118449424.jpg";
+import triPinkRed from "@assets/unnamed_1779118444321.jpg";
+// Additional fashion / modelling
+import fashNavy from "@assets/unnamed_1779118410872.jpg";
+import fashTeal from "@assets/unnamed_1779118424529.jpg";
+import fashGreenSit2 from "@assets/unnamed_1779118428503.jpg";
+import fashYellowSpin from "@assets/unnamed_1779118470385.jpg";
+// Achievement / personal photos
+import achGladrags from "@assets/unnamed_1779118342065.jpg";
+import achGladragsGroup from "@assets/unnamed_1779118348001.jpg";
+import achCrown from "@assets/unnamed_1779118490987.jpg";
+import achSinging from "@assets/unnamed_1779118497700.jpg";
+import achCasual from "@assets/unnamed_1779118514805.jpg";
+import achAbacus from "@assets/unnamed_1779118522303.jpg";
 
 /* -------------------- HERO SLIDESHOW -------------------- */
 const HERO_SLIDES: Slide[] = [
   {
-    src: texturePaper, alt: "Paper texture pattern",
-    tone: "light", eyebrow: "Geetika Gehlot · I",
-    title: "Building worlds.",
-    body: "Scientist · Researcher · Creator · Musician · Storyteller · Innovator. A 15-year-old multidisciplinary mind from Montréal.",
+    src: slideGarden, alt: "Geetika modelling a yellow and pink lehenga choli in a garden",
+    tone: "light", eyebrow: "Geetika Gehlot · Modelling",
+    title: "",
+    body: "International fashion model · child artist · Montréal.",
   },
   {
-    src: atmosTelescope, alt: "Telescope under stars",
-    tone: "light", eyebrow: "Plate II · Observation",
-    title: "Through the lens.",
-    body: "Robotics, physics, and the slow art of paying attention.",
+    src: slidePinkBlue, alt: "Geetika in a pink lehenga with blue dupatta",
+    tone: "light", eyebrow: "Fashion · Festive Wear",
+    title: "",
+    body: "Lead model for international fashion stores — UK, US & NZ.",
   },
   {
-    src: atmosNotebook, alt: "Open notebook with handwritten pages",
-    tone: "dark", eyebrow: "Plate III · Notation",
-    title: "On the page.",
-    body: "A novel cycle in motion. Words before pixels, always.",
+    src: slideCreamGold, alt: "Geetika in a cream and gold lehenga with flower crown",
+    tone: "light", eyebrow: "Fashion · Bridal Collection",
+    title: "",
+    body: "Garment shoots for Amazon, Alibaba, Indiamart and more.",
   },
   {
-    src: atmosMusic, alt: "Stage lights and microphone",
-    tone: "light", eyebrow: "Plate IV · Resonance",
-    title: "In full voice.",
-    body: "Hindustani vocal, voice acting, and the discipline of stage.",
+    src: slideBlueOutdoor, alt: "Geetika in a blue lehenga outdoors",
+    tone: "light", eyebrow: "Fashion · Designer Wear",
+    title: "",
+    body: "Selected for top-10 Little Miss Gladrags India.",
   },
   {
-    src: texturePaper, alt: "Aged paper texture",
-    tone: "dark", eyebrow: "Plate V · Dossier",
-    title: "Examined in public.",
-    body: "Every claim, every clipping, every receipt — open for inspection.",
+    src: slideGreenTeal, alt: "Geetika in a teal and gold lehenga",
+    tone: "light", eyebrow: "Fashion · Wedding Collection",
+    title: "",
+    body: "Screen credits — Veere Di Wedding · Hindi Medium · Alt Balaji.",
+  },
+  {
+    src: slideYellowJacket, alt: "Geetika in a yellow lehenga with embroidered jacket",
+    tone: "light", eyebrow: "Fashion · Festive Collection",
+    title: "",
+    body: "Performer · Band-it Festival 2019 · Ryan International.",
   },
 ];
 
@@ -271,9 +300,9 @@ const Index = () => {
       <section className="container py-8 md:py-10">
         <div className="grid md:grid-cols-3 gap-2">
           {[
-            { src: atmosTelescope, label: "Observation", num: "I" },
-            { src: atmosNotebook, label: "Notation", num: "II" },
-            { src: atmosMusic, label: "Resonance", num: "III" },
+            { src: triGreenSit, label: "Festive Wear", num: "I" },
+            { src: triGreenWide, label: "Bridal Collection", num: "II" },
+            { src: triPinkRed, label: "Designer Wear", num: "III" },
           ].map((x, idx) => (
             <figure
               key={x.label}
@@ -384,6 +413,94 @@ const Index = () => {
               );
             })}
           </ol>
+        </div>
+      </section>
+
+      {/* MODELLING GALLERY — additional fashion shots */}
+      <section className="container py-8 md:py-10">
+        <div className="flex items-end justify-between mb-6 gap-6 flex-wrap" data-reveal>
+          <div>
+            <p className="label-gold mb-3">§ 04 · Modelling</p>
+            <h2 className="display-xl text-2xl md:text-3xl text-ink">
+              On the <span className="font-accent text-gold">runway.</span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-ink-soft text-sm leading-relaxed">
+            Fashion shoots for international stores — UK, US, NZ, Amazon, Alibaba.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2" data-reveal>
+          {[
+            { src: fashNavy,      alt: "Geetika in a navy blue lehenga choli" },
+            { src: fashTeal,      alt: "Geetika in a teal blue lehenga outdoors" },
+            { src: fashGreenSit2, alt: "Geetika in a green lehenga seated" },
+            { src: fashYellowSpin,alt: "Geetika in a yellow lehenga choli spinning" },
+          ].map(({ src, alt }, idx) => (
+            <figure
+              key={alt}
+              data-reveal
+              data-reveal-delay={String(idx * 80)}
+              className="relative aspect-[3/4] overflow-hidden group crumpled-paper film-grain stipple"
+            >
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1400 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* MEDIA & MILESTONES — achievement photos */}
+      <section className="relative py-10 md:py-14 overflow-hidden crinkle film-grain dust linen parchment weave-soft">
+        <img
+          src={texturePaper}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-multiply pointer-events-none"
+        />
+        <div className="container relative">
+          <div className="flex items-end justify-between mb-8 gap-6 flex-wrap" data-reveal>
+            <div>
+              <p className="label-gold mb-3">§ 05 · Media & Milestones</p>
+              <h2 className="display-xl text-2xl md:text-3xl lg:text-4xl text-ink">
+                Moments <span className="font-accent text-gold">on record.</span>
+              </h2>
+            </div>
+            <p className="max-w-md text-ink-soft text-sm leading-relaxed">
+              Gladrags · Zee TV · Star Parivaar · Ryan International · DD Kisan · Alt Balaji
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {[
+              { src: achSinging,      alt: "Geetika performing on stage at Ryan International", caption: "Ryan International — Children's Day" },
+              { src: achCrown,        alt: "Geetika being crowned at a competition", caption: "Ryan Princess Competition" },
+              { src: achGladrags,     alt: "Geetika at Gladrags Little Miss & Master India", caption: "Top 10 · Gladrags Little Miss India" },
+              { src: achGladragsGroup,alt: "Gladrags Little Miss & Master India Mumbai Pageant group photo", caption: "Gladrags Mumbai Pageant" },
+              { src: achAbacus,       alt: "Geetika with Whizz Kidzs Abacus trophy", caption: "Whizz Kidzs — Abacus National Award" },
+              { src: achCasual,       alt: "Geetika in a casual photoshoot outdoors", caption: "International Photoshoot" },
+            ].map(({ src, alt, caption }, idx) => (
+              <figure
+                key={caption}
+                data-reveal
+                data-reveal-delay={String(idx * 80)}
+                className="relative overflow-hidden group crumpled-paper film-grain stipple fancy-tile"
+              >
+                <img
+                  src={src}
+                  alt={alt}
+                  loading="lazy"
+                  className="w-full aspect-[4/5] object-cover object-top transition-transform duration-1400 group-hover:scale-105"
+                />
+                <figcaption className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-navy-deep/90 to-transparent text-paper">
+                  <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-gold/90 leading-tight">{caption}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 

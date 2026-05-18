@@ -1,0 +1,197 @@
+Here is the cleaned replacement copy.
+
+---
+
+# Hero
+
+**Hi, I'm Geetika Gehlot.**
+
+I'm a 15-year-old student, researcher, musician, writer, and builder based in Montreal.
+
+I was born in India and moved to Canada in 2024. Since childhood, I've been obsessed with understanding how things work, from quantum physics and mathematics to music, robotics, entrepreneurship, and storytelling.
+
+This site is where I document what I'm building, learning, performing, researching, and testing in public.
+
+↓ SCROLL TO ENTER
+
+---
+
+# 00 · Why This Exists
+
+Most portfolios show finished results. I wanted to show the process too.
+
+This site documents what I've actually built, studied, performed, competed in, and learned, including research notes, experiments, competitions, performances, creative projects, leadership work, and long-term goals.
+
+I'm currently studying in Secondary IV in Montreal while preparing for advanced opportunities in physics, engineering, mathematics, research, and business.
+
+My long-term goal is simple: build things that matter.
+
+> "If something interests me, I don't stop at learning it. I test it, build with it, and push it until it becomes useful."
+
+---
+
+# 01 · Toolkit
+
+### Physics
+
+Self-studying advanced physics since age 10.
+
+Focused on quantum mechanics, relativity, particle physics, astrophysics, and university-level problem solving.
+
+### Mathematics
+
+Olympiad training in algebra, calculus, proofs, and advanced problem solving.
+
+Scored 100 in mathematics on Quebec ministry exams.
+
+### Robotics
+
+Member of FIRST Robotics Competition Team 7700.
+
+Hands-on experience in engineering design, prototyping, teamwork, and technical problem solving.
+
+### Leadership
+
+President of the YMCA Youth Co-op in Montreal.
+
+Built and led a team of 15 students managing finance, marketing, outreach, and operations.
+
+### Music
+
+Trained in Hindustani classical vocals.
+
+Electric guitarist with a focus on advanced rhythm, phrasing, and technical performance.
+
+### Writing
+
+Author of a long-form science fiction universe with more than 400 drafted chapters.
+
+### Acting & Voice
+
+Experience in Bollywood child acting, dubbing, and voice performance.
+
+### Technology
+
+Building projects with React, TypeScript, Python, digital design, audio production, and multimedia systems.
+
+### Visual Art
+
+Canvas painting, embroidery, design, and mixed media.
+
+### Languages
+
+English, Hindi, French.
+
+---
+
+# 02 · Featured Work
+
+### Robotics
+
+Engineering, prototyping, competition, and systems thinking through Team 7700.
+
+### The Novel Universe
+
+A long-running science fiction and fantasy project with hundreds of chapters, worldbuilding systems, and original lore.
+
+### YMCA Youth Co-op
+
+Building a youth-led business from zero in Montreal.
+
+### Physics Journey
+
+Independent study, mentorship, olympiads, and early university-level exploration.
+
+### Music & Performance
+
+Hindustani vocals, electric guitar, live performance, and production.
+
+### Zionaxelle
+
+Original technology, design, storytelling, and experimental creative projects.
+
+---
+
+# 03 · Achievements
+
+### Academic Competitions
+
+SOF Olympiads, mathematics competitions, science competitions, and advanced academic preparation.
+
+### AP Coursework
+
+Prepared for and completed multiple advanced placement subjects in science and mathematics.
+
+### Karate
+
+Years of training, competitive discipline, and belt progression.
+
+### Mental Math & Abacus
+
+Competition medals and high-speed calculation training.
+
+### Chess
+
+Strategic thinking, competitive play, and pattern recognition.
+
+### Sports
+
+Badminton, table tennis, and high-focus competitive play.
+
+---
+
+# 04 · Explore
+
+## 01 · About
+
+Who I am, where I come from, and what drives me.
+
+## 02 · Academics
+
+Education, exams, awards, physics, mathematics, and research.
+
+## 03 · Projects
+
+Robotics, writing, music, technology, design, leadership, and creative work.
+
+## 04 · CV & Records
+
+Certificates, transcripts, awards, documentation, and milestones.
+
+## 05 · Contact
+
+Open correspondence, collaborations, and opportunities.
+
+---
+
+# 05 · Core Traits
+
+### I
+
+I ask better questions than most people my age.
+
+### II
+
+I learn fast, then test what I learn.
+
+### III
+
+I'm comfortable leading from the front or building quietly in the background.
+
+### IV
+
+I stay with hard problems longer than most people.
+
+### V
+
+I connect ideas across science, art, engineering, and business.
+
+---
+
+# Footer
+
+**Built by Geetika Gehlot. Updated as the work grows.**
+
+Montreal, Quebec, Canada.
+
+Student. Researcher. Builder. Always in progress.
