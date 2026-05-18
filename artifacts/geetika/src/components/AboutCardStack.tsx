@@ -258,6 +258,9 @@ function Essay() {
 
 export function AboutCardStack({ topics: _topics }: { topics: TopicData[] }) {
   const shellRef = useRef<HTMLDivElement>(null);
+  const essayContainerRef = useRef<HTMLDivElement>(null);
+  const essayContentRef = useRef<HTMLDivElement>(null);
+  const [maxEssayScroll, setMaxEssayScroll] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const [vw, setVw] = useState(typeof window !== "undefined" ? window.innerWidth : 1280);
   const [vh, setVh] = useState(typeof window !== "undefined" ? window.innerHeight : 900);
@@ -273,6 +276,21 @@ export function AboutCardStack({ topics: _topics }: { topics: TopicData[] }) {
       window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      if (essayContainerRef.current && essayContentRef.current) {
+        const containerH = essayContainerRef.current.offsetHeight;
+        const contentH = essayContentRef.current.scrollHeight;
+        setMaxEssayScroll(Math.max(0, contentH - containerH));
+      }
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (essayContainerRef.current) ro.observe(essayContainerRef.current);
+    if (essayContentRef.current) ro.observe(essayContentRef.current);
+    return () => ro.disconnect();
+  }, [contentVisible, cardPad]);
 
   const totalScroll = shellRef.current ? Math.max(1, shellRef.current.offsetHeight - vh) : 1;
   const t = clamp(scrollY / totalScroll, 0, 1);
@@ -390,6 +408,7 @@ export function AboutCardStack({ topics: _topics }: { topics: TopicData[] }) {
                 <div style={{ height: 1, background: "hsl(43 60% 50% / 0.1)", margin: `${Math.round(cardPad * 0.6)}px ${cardPad}px` }} />
 
                 <div
+                  ref={essayContainerRef}
                   style={{
                     flex: 1,
                     overflow: "hidden",
@@ -397,9 +416,10 @@ export function AboutCardStack({ topics: _topics }: { topics: TopicData[] }) {
                   }}
                 >
                   <div
+                    ref={essayContentRef}
                     style={{
                       willChange: "transform",
-                      transform: `translateY(-${essayPhaseT * 100}%)`,
+                      transform: `translateY(-${essayPhaseT * maxEssayScroll}px)`,
                     }}
                   >
                     <Essay />
