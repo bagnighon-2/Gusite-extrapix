@@ -92,7 +92,7 @@ export function HeroSlideshow({ slides, intervalMs = 6000 }: Props) {
       {/* Slides */}
       {slides.map((slide, idx) => (
         <img
-          key={slide.src}
+          key={idx}
           src={slide.src}
           alt={slide.alt}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
