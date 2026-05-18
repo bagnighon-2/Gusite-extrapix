@@ -136,8 +136,8 @@ export function PageTransition() {
     const handler = (e: Event) => {
       const { to, reload } = (e as CustomEvent<{ to: string; reload?: boolean }>).detail;
       if (transitionBusy.current && !reload) return;
-      if (to === pathname && !reload) return;
       if (to === pathname) {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
         runTransition(to, true);
         return;
       }
