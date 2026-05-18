@@ -66,7 +66,7 @@ function TopicCard({ topic, index, total }: { topic: TopicData; index: number; t
                 <div className="pointer-events-none absolute" style={{ bottom: "3rem", right: "3rem", fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(160px, 22vw, 300px)", fontWeight: 700, lineHeight: 1, color: `${accent}08`, userSelect: "none", letterSpacing: "-0.05em" }}>{numLabel}</div>
                 <div className="relative z-10">
                   <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(32px, 5.5vw, 72px)", fontWeight: 600, lineHeight: 1.05, color: `hsl(38 30% ${hovered ? 96 : 88}%)`, transition: "color 0.9s ease", marginBottom: "1.2rem" }}>{topic.label}</h3>
-                  <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(16px, 2vw, 24px)", fontStyle: "italic", color: `hsl(38 20% ${hovered ? 76 : 65}%)`, maxWidth: "560px", lineHeight: 1.55, transition: "color 0.9s ease" }}>{topic.blurb}</p>
+                  <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "clamp(16px, 2vw, 24px)", fontStyle: "italic", color: `hsl(38 20% ${hovered ? 76 : 65}%)`, maxWidth: "560px", lineHeight: 1.55, transition: "color 0.9s ease" }}>{topic.blurb}</p>
                   <div className="inline-flex items-center gap-2.5 mt-8" style={{ border: `1px solid ${accent}${hovered ? "45" : "22"}`, padding: "8px 18px", borderRadius: "2px", transition: "border-color 0.9s ease, transform 0.9s ease", transform: hovered ? "translateY(-1px)" : "translateY(0)" }}>
                     <span className="font-mono uppercase tracking-[0.28em]" style={{ fontSize: "9.5px", color: `${accent}${hovered ? "b0" : "60"}`, transition: "color 0.9s ease" }}>Read more</span>
                     <span style={{ color: `${accent}${hovered ? "b0" : "45"}`, fontSize: "12px", transition: "color 0.9s ease" }}>→</span>
@@ -86,7 +86,7 @@ function TopicCard({ topic, index, total }: { topic: TopicData; index: number; t
               <div className="flex-1 h-px bg-border/40" />
             </div>
             <DialogTitle style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 600, color: "hsl(38 40% 92%)", lineHeight: 1.1 }}>{topic.label}</DialogTitle>
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "18px", fontStyle: "italic", color: "hsl(38 20% 65%)", marginTop: "0.5rem", marginBottom: "1.5rem" }}>{topic.blurb}</p>
+            <p style={{ fontFamily: "'Lora', Georgia, serif", fontSize: "18px", fontStyle: "italic", color: "hsl(38 20% 65%)", marginTop: "0.5rem", marginBottom: "1.5rem" }}>{topic.blurb}</p>
             <div className="h-px bg-border/30 mb-6" />
             <DialogDescription asChild>
               <div style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: "15px", lineHeight: 1.8, color: "hsl(220 15% 75%)" }}>

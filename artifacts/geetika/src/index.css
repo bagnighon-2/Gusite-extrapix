@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -113,7 +113,7 @@
     font-weight: 500;
   }
   .font-italic-display, .font-accent {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Lora', Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
     font-weight: 500;
     letter-spacing: 0;
@@ -142,20 +142,19 @@
   .eyebrow { @apply font-mono text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground; }
   .label-gold { @apply font-mono text-[0.55rem] uppercase tracking-[0.32em]; color: hsl(var(--gold)); }
   .display-xl {
-    font-family: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: 0.04em;
+    font-family: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
     color: hsl(var(--gold));
     transition: all 0.6s var(--ease-editorial);
   }
   .display-xl:hover {
     color: hsl(var(--gold-bright));
     text-shadow: 0 0 18px hsl(var(--gold) / 0.45), 0 0 40px hsl(var(--gold) / 0.2);
-    letter-spacing: 0.08em;
   }
   .drop-cap::first-letter {
-    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Lora', Georgia, 'Times New Roman', Times, serif;
     font-size: 5rem;
     line-height: 0.85;
     float: left;
