@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import type { TopicData } from "@/data/clusters";
 
@@ -33,15 +33,13 @@ function buildLayout(topics: TopicData[], wideSlug?: string): LayoutEntry[] {
   }
 
   // Fill the incomplete row with a single "..." placeholder
-  // pp==0 → last row complete;  pp==2 → just finished 2-col row, nothing to fill
-  if (pp === 1) entries.push({ kind: "filler", span: 3 });      // missing 1 in 2-col row
-  else if (pp === 3) entries.push({ kind: "filler", span: 4 }); // missing 2 in 3-col row → one wide filler
-  else if (pp === 4) entries.push({ kind: "filler", span: 2 }); // missing 1 in 3-col row
+  if (pp === 1) entries.push({ kind: "filler", span: 3 });
+  else if (pp === 3) entries.push({ kind: "filler", span: 4 });
+  else if (pp === 4) entries.push({ kind: "filler", span: 2 });
 
   return entries;
 }
 
-// Static span class map — avoids dynamic Tailwind class generation
 const SPAN_CLASS: Record<number, string> = {
   2: "col-span-2",
   3: "col-span-3",
@@ -109,10 +107,39 @@ function ArchiveTile({
                   className="absolute inset-0 w-full h-full object-cover object-top"
                 />
               )}
+              {topic.embed?.type === "link" && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 gap-6">
+                  <div className="text-center space-y-3">
+                    <span className="font-mono text-[0.55rem] uppercase tracking-[0.32em] text-gold/60 block">
+                      External Site
+                    </span>
+                    <p className="font-display text-xl text-paper-contrast leading-tight">
+                      {topic.embed.caption ?? topic.label}
+                    </p>
+                    <p className="font-mono text-[0.58rem] uppercase tracking-[0.18em] text-gold/50">
+                      {topic.embed.src.replace(/^https?:\/\//, "")}
+                    </p>
+                  </div>
+                  <a
+                    href={topic.embed.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.22em] text-gold border border-gold/50 px-5 py-2.5 hover:bg-gold/10 transition-colors duration-300"
+                  >
+                    Open Site <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              )}
+              {!topic.embed && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-display text-4xl text-gold/20 tracking-widest">—</span>
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-5 left-5 right-5 pointer-events-none">
                 <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-gold/70">{num}</span>
-                {topic.embed?.caption && (
+                {topic.embed?.caption && topic.embed.type !== "link" && (
                   <p className="font-mono text-[0.55rem] uppercase tracking-[0.2em] text-gold/45 mt-1 line-clamp-2">{topic.embed.caption}</p>
                 )}
               </div>
