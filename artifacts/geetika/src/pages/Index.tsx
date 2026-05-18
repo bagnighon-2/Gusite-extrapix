@@ -10,8 +10,6 @@ import { Bento, type BentoItem } from "@/components/Bento";
 import { HeroSlideshow, type Slide } from "@/components/HeroSlideshow";
 import { CLUSTERS, findCluster } from "@/data/clusters";
 import { useReveal } from "@/hooks/useReveal";
-import textureCosmos from "@/assets/texture-cosmos.jpg";
-import texturePaper from "@/assets/texture-paper.jpg";
 import atmosTelescope from "@/assets/atmos-telescope.jpg";
 import atmosNotebook from "@/assets/atmos-notebook.jpg";
 import atmosMusic from "@/assets/atmos-music.jpg";
@@ -159,25 +157,6 @@ const Index = () => {
         id="after-hero"
         className="relative py-12 md:py-16 scroll-mt-16 overflow-hidden crumpled-paper crinkle film-grain leak parchment fibers"
       >
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-multiply pointer-events-none animate-ken"
-        />
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute -right-16 top-6 w-[44%] max-w-2xl h-[80%] object-cover opacity-20 pointer-events-none hidden md:block animate-float"
-        />
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute -left-24 -bottom-10 w-[28%] max-w-md h-[55%] object-cover opacity-10 pointer-events-none hidden md:block animate-drift"
-        />
-
         <div className="container relative">
           <div className="grid md:grid-cols-12 gap-8 md:gap-10">
             <div className="md:col-span-3" data-reveal>
@@ -218,18 +197,6 @@ const Index = () => {
 
       {/* SKILLS TOOLKIT — layered telescope + cosmos veil + scanlines */}
       <section className="relative py-10 md:py-14 overflow-hidden scanlines film-grain dust weave-soft stipple">
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute -left-24 top-10 w-[40%] max-w-xl h-[80%] object-cover opacity-25 pointer-events-none hidden md:block animate-float"
-        />
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute right-0 -bottom-10 w-[55%] h-[60%] object-cover opacity-10 pointer-events-none animate-drift"
-        />
         <div className="container relative">
           <div className="flex items-end justify-between mb-8 gap-6 flex-wrap" data-reveal>
             <div>
@@ -266,18 +233,6 @@ const Index = () => {
 
       {/* FEATURED HIGHLIGHTS BENTO — cosmos bg + crumpled-paper field + drifting notebook */}
       <section className="relative py-10 md:py-14 overflow-hidden crumpled-paper film-grain leak marble fibers">
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none animate-ken"
-        />
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute -left-10 bottom-0 w-[26%] max-w-sm h-[55%] object-cover opacity-10 pointer-events-none hidden md:block animate-float"
-        />
         <div className="container relative">
           <div className="flex items-end justify-between mb-8 gap-6 flex-wrap" data-reveal>
             <div>
@@ -332,12 +287,6 @@ const Index = () => {
 
       {/* RANDOM WINS / CURIOSITIES TEASER — paper texture wash + crinkle */}
       <section className="relative py-10 md:py-14 overflow-hidden crinkle film-grain dust linen parchment weave-soft">
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-multiply pointer-events-none"
-        />
         <div className="container relative">
           <div className="flex items-end justify-between mb-8 gap-6 flex-wrap" data-reveal>
             <div>
@@ -362,18 +311,6 @@ const Index = () => {
 
       {/* GRAND GROUPS — index, layered music plate */}
       <section className="relative py-10 md:py-16 overflow-hidden film-grain dust crumpled-paper marble fibers">
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute right-0 top-0 w-[40%] max-w-2xl h-[55%] object-cover opacity-20 grayscale pointer-events-none hidden md:block animate-float"
-        />
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute -left-10 bottom-0 w-[30%] max-w-md h-[50%] object-cover opacity-15 mix-blend-multiply pointer-events-none hidden md:block"
-        />
         <div className="container relative">
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap" data-reveal>
             <div>
@@ -418,18 +355,6 @@ const Index = () => {
 
       {/* CORE TRAITS BAND — layered cosmos + telescope + crumpled-paper veil */}
       <section className="force-light bg-navy-deep text-paper py-14 md:py-20 relative overflow-hidden grain crumpled-paper film-grain leak marble stipple">
-        <img
-          src={textureCosmos}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover opacity-40 animate-ken"
-        />
-        <img
-          src={atmosTelescope}
-          alt=""
-          aria-hidden
-          className="absolute -right-20 top-10 w-[35%] max-w-xl h-[70%] object-cover opacity-15 grayscale pointer-events-none hidden md:block animate-float"
-        />
         <div className="container relative">
           <p className="label-gold mb-6" data-reveal>§ 05 · Core Traits</p>
           <h2 className="display-xl text-2xl md:text-4xl mb-8 max-w-3xl text-balance" data-reveal>

@@ -2,22 +2,8 @@ import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import type { TopicData } from "@/data/clusters";
-import textureCosmos from "@/assets/texture-cosmos.jpg";
-import texturePaper from "@/assets/texture-paper.jpg";
-
-const BG_POOL = [
-  textureCosmos, texturePaper, textureCosmos, texturePaper, textureCosmos,
-  texturePaper, textureCosmos, texturePaper, textureCosmos, texturePaper,
-  textureCosmos, texturePaper,
-];
-
-function pickImage(topic: TopicData, index: number): string {
-  const s = (topic.label + " " + topic.blurb).toLowerCase();
-  if (s.includes("music") || s.includes("vocal") || s.includes("riyaaz") || s.includes("instrument")) return texturePaper;
-  if (s.includes("physics") || s.includes("telescope") || s.includes("research") || s.includes("cosmos") || s.includes("science")) return textureCosmos;
-  if (s.includes("note") || s.includes("writing") || s.includes("essay") || s.includes("journal") || s.includes("novel")) return texturePaper;
-  if (s.includes("profile") || s.includes("identity") || s.includes("about") || s.includes("personal")) return textureCosmos;
-  return BG_POOL[index % BG_POOL.length];
+function pickImage(_topic: TopicData, _index: number): string | null {
+  return null;
 }
 
 // We use a 6-column grid (LCM of 2 and 3) so spans are always whole integers:
@@ -76,7 +62,6 @@ function ArchiveTile({
 }) {
   const [open, setOpen] = useState(false);
   const num = String(index + 1).padStart(2, "0");
-  const img = pickImage(topic, index);
 
   return (
     <>
@@ -86,15 +71,7 @@ function ArchiveTile({
         className={`fancy-tile group/tile relative ${spanClass} overflow-hidden bg-paper border border-border hover:bg-navy-deep hover:text-paper-contrast transition-all duration-500 ease-cinematic hover:-translate-y-0.5 hover:border-gold fibers stipple text-left`}
         style={{ height: "160px" }}
       >
-        <div className="absolute inset-0 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-500">
-          <img
-            src={img}
-            alt=""
-            aria-hidden
-            className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-navy-deep/40 to-transparent" />
-        </div>
+        <div className="absolute inset-0 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-500 bg-navy-deep/40" />
 
         <div className="relative z-10 h-full flex flex-col justify-between p-5 md:p-6">
           <div className="flex items-start justify-between mb-4">
@@ -118,11 +95,6 @@ function ArchiveTile({
         <DialogContent className="max-w-2xl p-0 overflow-hidden bg-paper">
           <div className="grid md:grid-cols-[1fr,1.1fr]">
             <div className="relative min-h-[200px] md:min-h-[440px] overflow-hidden bg-navy-deep">
-              <img
-                src={img}
-                alt={topic.label}
-                className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale"
-              />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 to-transparent" />
               <div className="absolute bottom-5 left-5">
                 <span className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-gold/70">{num}</span>
