@@ -1,5 +1,6 @@
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { forwardRef, useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
 import { Menu, X } from "lucide-react";
 import { CLUSTERS } from "@/data/clusters";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
@@ -18,6 +19,34 @@ function forceNav(to: string) {
     new CustomEvent("gg-force-nav", { detail: { to, reload: false } })
   );
 }
+
+export const ScrollToTopButton = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 24);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <button
+      type="button"
+      aria-label="Scroll to top"
+      onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+      className={`fixed right-4 bottom-4 z-[70] flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-navy-deep/80 text-gold shadow-[0_10px_24px_-14px_hsl(220_60%_4%/0.65)] backdrop-blur-md transition-all duration-300 ${
+        visible ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 translate-y-2"
+      }`}
+    >
+      <ArrowUp className="h-4 w-4" strokeWidth={2.5} />
+    </button>
+  );
+};
 
 export const SiteNav = () => {
   const [open, setOpen] = useState(false);
@@ -174,6 +203,7 @@ export const PageShell = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen bg-paper text-foreground">
     <SiteNav />
     <ScrollProgressBar />
+    <ScrollToTopButton />
     <main className="pt-16">{children}</main>
     <SiteFooter />
   </div>
