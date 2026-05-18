@@ -3,16 +3,19 @@ import { User, GraduationCap, Wand as Wand2, FileText, Mail, Sparkles } from "lu
 
 /* ── New data model ── */
 
+export type EmbedItem = {
+  type: "youtube" | "image" | "link";
+  src: string;
+  caption?: string;
+};
+
 export type TopicData = {
   slug: string;
   label: string;
   blurb: string;
   detail: string;
-  embed?: {
-    type: "youtube" | "image" | "link";
-    src: string;
-    caption?: string;
-  };
+  embed?: EmbedItem;
+  gallery?: EmbedItem[];
 };
 
 export type Cluster = {
@@ -24,12 +27,13 @@ export type Cluster = {
   topics: TopicData[];
 };
 
-const topic = (label: string, blurb: string, detail: string, embed?: TopicData["embed"]): TopicData => ({
+const topic = (label: string, blurb: string, detail: string, embed?: EmbedItem, gallery?: EmbedItem[]): TopicData => ({
   slug: label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
   label,
   blurb,
   detail,
-  embed,
+  ...(embed ? { embed } : {}),
+  ...(gallery?.length ? { gallery } : {}),
 });
 
 const PLAYLIST = "https://www.youtube.com/embed/videoseries?list=PLa3Wj4jzB_6FG8GcJA41Lx2JGtABeQN5f";
@@ -47,7 +51,12 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-shivaratri-adiyogi.jpg", caption: "Mahashivaratri — The Adiyogi, Festival Night" }),
       topic("Self-Taught Astronomer", "Every constellation. Every blank space. A year of shooting stars.",
         "At age 14–15, decided to study astronomy entirely independently — no class, no teacher, no curriculum. Mapped every constellation visible in the northern hemisphere, studied the blank spaces between them, learned star positions, declinations, and how the sky rotates through the year.\n\nTracked meteor showers in advance and stayed up through the night to observe them — the Eta Aquarids (radiant in Aquarius, best visibility pre-dawn), the Perseids, and others. Photographed the sky from the rooftop. Also tracked Comet 12P/Pons-Brooks through the constellation Taurus in April 2024 — one of the brightest periodic comets, visible to the naked eye. The whole year was structured around what the sky would do next.",
-        { type: "image", src: "/photo-moon-stargazing.jpg", caption: "Night Sky — Rooftop Stargazing Session" }),
+        { type: "image", src: "/photo-moon-stargazing.jpg", caption: "Night Sky — Rooftop Stargazing Session" },
+        [
+          { type: "image", src: "/photo-moon-stargazing.jpg", caption: "Night Sky — Rooftop Stargazing Session" },
+          { type: "image", src: "/photo-comet-pons-brooks.jpg", caption: "Comet 12P/Pons-Brooks — Taurus, April 2024" },
+          { type: "image", src: "/photo-meteor-eta-aquarii.jpg", caption: "Eta Aquarids Meteor Shower — Pre-Dawn Observation" },
+        ]),
       topic("NASA — Name in Space", "Geetika Gehlot. Europa Clipper. Jupiter orbit, 2030.",
         "Name inscribed on NASA's Europa Clipper mission — launched in October 2024, bound for Jupiter's moon Europa, arriving in 2030. The mission will investigate whether Europa's subsurface ocean could support life. Over a million names were submitted and encoded onto a microchip aboard the spacecraft. Geetika Gehlot is aboard. Arrival target: Jupiter orbit, 2030.",
         { type: "image", src: "/photo-nasa-europa-clipper.jpg", caption: "NASA Europa Clipper — Message in a Bottle, Geetika Gehlot" }),
@@ -89,7 +98,11 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-allen-physics.jpg", caption: "Allen Pre-Medical Physics — May 26, 2023" }),
       topic("Advanced Biology at 14", "College-level biology. Self-annotated. Proof of serious study.",
         "In 2023, studying college-level advanced biology at an age when most students are still doing basic cellular structure. The Allen biology material goes deep — mucosal layers, Brunner's glands, Paneth cells, nerve plexuses, Peyer's patches. All annotated by hand.\n\nThe mitochondria notes (also May 26, 2023) show the same depth: Kolliker discovery, C. Benda naming, Oxysomes and ATP synthase particles, Endosymbiont Hypothesis tracing to Purple Sulphur Bacteria. This is the level of detail the study was operating at. Maternal inheritance. Sensitive to Chloramphenicol. All of it, at 14.",
-        { type: "image", src: "/photo-allen-bio-notes.jpg", caption: "Allen Biology Notes — Advanced Level, May 2023" }),
+        { type: "image", src: "/photo-allen-bio-notes.jpg", caption: "Allen Biology Notes — Advanced Level, May 2023" },
+        [
+          { type: "image", src: "/photo-allen-bio-notes.jpg", caption: "Allen Biology — Intestinal Anatomy Notes, May 2023" },
+          { type: "image", src: "/photo-bio-notes-mitochondria.jpg", caption: "Allen Biology — Mitochondria & Endosymbiont Hypothesis, May 2023" },
+        ]),
       topic("Awards Vault", "Every ribbon, every certificate.",
         "Academic and extracurricular awards across mathematics, science, and competitions. Includes olympiad participation, school honours, and recognition in structured academic programs. SOF Science Olympiad, TCS IntelliGem Finalist, Gladrags Little Miss India Top 10, Whizz Kidzs Abacus National Award, and more.",
         { type: "image", src: "/photo-sof.jpg", caption: "SOF Science Olympiad — Certificate & Medal" }),
@@ -103,7 +116,14 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-jun-ye-selfie.jpg", caption: "With Dr. Jun Ye (JILA/NIST) — After Lecture, McGill 2025" }),
       topic("Cancer Cell Lab", "Pipettes, gel electrophoresis, and real bench science.",
         "Hands-on session at a McGill-affiliated cancer research lab in March 2025. Work included gel electrophoresis setup, pipetting, and use of a Zeiss stereo microscope. Worked alongside graduate researchers — Hengameh, Darolan, Emily, and Caitlyn — in a real P5 lab environment. First experience with live bench science beyond school biology. Learning to load a gel, reading the results, understanding what the bands mean. The kind of day that confirms a direction.",
-        { type: "image", src: "/photo-lab-microscope.jpg", caption: "Zeiss Microscope — Cancer Cell Lab, March 2025" }),
+        { type: "image", src: "/photo-lab-microscope.jpg", caption: "Zeiss Microscope — Cancer Cell Lab, March 2025" },
+        [
+          { type: "image", src: "/photo-lab-microscope.jpg", caption: "Zeiss Stereo Microscope — Cancer Cell Lab, March 2025" },
+          { type: "image", src: "/photo-lab-gel.jpg", caption: "Gel Electrophoresis — Loading & Running the Gel" },
+          { type: "image", src: "/photo-lab-pipette.jpg", caption: "Pipetting — Sample Preparation, Cancer Research Lab" },
+          { type: "image", src: "/photo-lab-pipette2.jpg", caption: "Pipetting Technique — P5 Lab Environment" },
+          { type: "image", src: "/photo-lab-team.jpg", caption: "Lab Team — Hengameh, Darolan, Emily & Caitlyn, March 2025" },
+        ]),
       topic("Research Interests", "Quantum, particle, astrophysics.",
         "Current interests include quantum mechanics, particle physics, relativity, astrophysics, and complex systems. Additional interest in computational modeling and mathematical structures underlying physical systems.",
         { type: "image", src: "/photo-jun-ye-lecture.jpg", caption: "Jun Ye Lecture — Precision Sensing for Fundamental Physics" }),
@@ -118,7 +138,11 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-ml-class.jpg", caption: "Machine Learning Class — Image Classification Project, March 2025" }),
       topic("CPR & First Aid", "Certified. Ready to act.",
         "Completed CPR and First Aid certification through school. Training included chest compressions, rescue breathing, bandaging techniques, and emergency response protocols. The class involved hands-on practice — wrapping, splinting, and working through simulated scenarios. Practical competence that sits alongside all the theoretical work.",
-        { type: "image", src: "/photo-cpr-class.jpg", caption: "First Aid Bandaging Practice — School Certification Session" }),
+        { type: "image", src: "/photo-cpr-class.jpg", caption: "First Aid Bandaging Practice — School Certification Session" },
+        [
+          { type: "image", src: "/photo-cpr-class.jpg", caption: "First Aid Bandaging Practice — School Certification Session" },
+          { type: "image", src: "/photo-cpr-cert-tv.jpg", caption: "CPR & First Aid — Certification" },
+        ]),
       topic("Independent Archive", "Self-directed projects and explorations.",
         "Self-directed projects outside formal coursework, including experiments, reading-based study, problem solving, and exploratory work in physics, mathematics, and computational topics."),
       topic("Mentorship", "Guided by teachers, coaches, and researchers.",
@@ -127,7 +151,13 @@ export const CLUSTERS: Cluster[] = [
         "Long-term academic trajectory includes university-level study in physics, engineering, or related interdisciplinary fields, with continued involvement in research and applied problem solving."),
       topic("TCS ION IntelliGem — Won", "Moral values drawing competition. Won. Twice.",
         "Competed in TCS ION IntelliGem — a national competition organized by Tata Consultancy Services. Won in the drawing category for moral values. This drawing was the winning entry: SDG 11, Sustainable Cities and Communities, rendered in a full illustrated scene with facts, statistics, characters, and a WOW callout — all hand-drawn and annotated.\n\nWon once in person, then won again in the online edition during the 2021 lockdown. Two wins, two different formats. The second time was conducted remotely because of COVID-19 restrictions. The work stood regardless of the setting.",
-        { type: "image", src: "/photo-tcs-intelligem-drawing.jpg", caption: "TCS ION IntelliGem — Winning Drawing, SDG Moral Values Category" }),
+        { type: "image", src: "/photo-tcs-intelligem-drawing.jpg", caption: "TCS ION IntelliGem — Winning Drawing, SDG Moral Values Category" },
+        [
+          { type: "image", src: "/photo-tcs-intelligem-drawing.jpg", caption: "Winning Drawing — SDG 11, Sustainable Cities & Communities" },
+          { type: "image", src: "/photo-intelligem.jpg", caption: "TCS ION IntelliGem — Award Ceremony" },
+          { type: "image", src: "/photo-intelligem-podium.jpg", caption: "TCS ION IntelliGem — On the Podium" },
+          { type: "image", src: "/photo-intelligem-stage.jpg", caption: "TCS ION IntelliGem — On Stage" },
+        ]),
       topic("Science Fair Log", "Experiments with receipts.",
         "Project boards, hypothesis tests, iterations, and presentation days. The science fair log captures the full cycle from idea to evidence, including the failures that shaped the final result."),
       topic("AP Prep", "Coursework, review, and exam strategy.",
@@ -140,7 +170,12 @@ export const CLUSTERS: Cluster[] = [
     topics: [
       topic("FRC Team 7700", "Build seasons and competition robotics.",
         "Participation in FIRST Robotics Competition Team 7700. Work includes mechanical design, prototyping, systems integration, and competition participation during build seasons. The school robotics hub — stacked 7700 bumpers, drill press, wiring stations, organized hardware trays — is where the season comes together. Iterative engineering under strict timelines, with the robot at the center.",
-        { type: "image", src: "/photo-robotics-pit.jpg", caption: "FRC Team 7700 — Pit Work, FIRST Robotics Quebec 2026" }),
+        { type: "image", src: "/photo-robotics-pit.jpg", caption: "FRC Team 7700 — Pit Work, FIRST Robotics Quebec 2026" },
+        [
+          { type: "image", src: "/photo-robotics-pit.jpg", caption: "FRC Team 7700 — Pit Work, FIRST Robotics Quebec 2026" },
+          { type: "image", src: "/photo-robotics-hub.jpg", caption: "FRC 7700 School Workshop — Build Season Hardware" },
+          { type: "image", src: "/photo-robotics-parts.jpg", caption: "FRC 7700 — Parts & Components, Build Season" },
+        ]),
       topic("Robotics Hub", "The shop. The parts. The process.",
         "The FRC 7700 robotics room at school: butcher-block workbenches, organized hardware trays sorted by fastener type and bracket size, 7700 bumper stacks in the corner, and the drill press running most of the season. This is where the robot gets built, and rebuilt, and rebuilt again.",
         { type: "image", src: "/photo-robotics-hub.jpg", caption: "FRC 7700 School Workshop — Build Season Hardware" }),
@@ -176,7 +211,11 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-guitar-pink.jpg", caption: "Custom Pink Electric Guitar — Hand-Illustrated Body Art" }),
       topic("WHS Jazz Band", "Grade 10 — Westmount High School jazz ensemble.",
         "Member of the Westmount High School jazz band in grade 10. Repertoire included 'Mack the Knife' and other jazz standards — guitar parts notated with chord voicings, extensions, and arrangement markings. The sheet music covered the bed at home; the concert was in the gym. Jazz discipline is different from classical: the rests are deliberate, the changes are fast, and the feel is everything.",
-        { type: "image", src: "/photo-jazz-sheets.jpg", caption: "WHS Jazz Band — Sheet Music Spread, Grade 10" }),
+        { type: "image", src: "/photo-jazz-sheets.jpg", caption: "WHS Jazz Band — Sheet Music Spread, Grade 10" },
+        [
+          { type: "image", src: "/photo-jazz-sheets.jpg", caption: "WHS Jazz Band — Full Sheet Music Spread, Grade 10" },
+          { type: "image", src: "/photo-jazz-sheet-detail.jpg", caption: "WHS Jazz Band — Sheet Music Detail, Chord Voicings & Markings" },
+        ]),
       topic("DJ Skills", "Mixing, scratching, and reading the room.",
         "Self-taught DJ practice using VirtualDJ, with focus on beatmatching, EQ layering, and transition technique. Builds playlists across pop, dance, and electronic genres. The same pattern-recognition that runs through physics and chess runs here — timing, anticipation, and knowing where the energy wants to go.",
         { type: "image", src: "/photo-dj-software.jpg", caption: "VirtualDJ Session — Beatmatching & Playlist Curation" }),
@@ -185,7 +224,13 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-dj-software.jpg", caption: "Music & Video Production — FL Studio + DaVinci Resolve Since 2020" }),
       topic("Professional Event Hosting", "Real parties. Real pay. Real results.",
         "Organized and hosted children's birthday parties in India on a professional basis — complete event production including decoration design, theme coordination, balloon setups, entertainment, and on-the-day hosting. Paid for the work.\n\nFirst engagement: hosted a kids' birthday party for an outside family and was paid. Second: organized and hosted own sister's birthday party — and was paid for that too. Multiple parties over time, different venues and setups, each one delivered and compensated. This is freelance event production, started as a teenager.",
-        { type: "image", src: "/photo-birthday-kids-party.jpg", caption: "Birthday Party Hosting — Organized & Hosted, Paid Event" }),
+        { type: "image", src: "/photo-birthday-kids-party.jpg", caption: "Birthday Party Hosting — Organized & Hosted, Paid Event" },
+        [
+          { type: "image", src: "/photo-birthday-kids-party.jpg", caption: "Kids Birthday Party — Hosted & Organized, Paid Event" },
+          { type: "image", src: "/photo-birthday-decor-princess.jpg", caption: "Birthday Decoration — Princess Theme Setup" },
+          { type: "image", src: "/photo-birthday-hosting-paid.jpg", caption: "Hosting in Action — Paid Birthday Event" },
+          { type: "image", src: "/photo-birthday-sister-party.jpg", caption: "Sister's Birthday Party — Organized & Hosted, Also Paid" },
+        ]),
       topic("Freelance Design", "T-shirt design. Freelance client work.",
         "Took on freelance design work for custom t-shirt projects — handling client brief, concept development, artwork creation, and final deliverable. Paid freelance work, completed independently. The same design sensibility that runs through visual art and media production applied to client deliverables with real stakes.",
         { type: "image", src: "/photo-tcs-intelligem-drawing.jpg", caption: "Design Work — Custom T-Shirt Freelance Projects" }),
@@ -205,10 +250,19 @@ export const CLUSTERS: Cluster[] = [
         { type: "youtube", src: PLAYLIST, caption: "Zee TV · Woh Apna Sa — Holi Special" }),
       topic("Star Parivaar — Iss Pyar Ko Kya Naam Doon", "On set with the cast of a hit Star Plus serial.",
         "Appeared in an episode of Iss Pyar Ko Kya Naam Doon on Star Plus, shot on the main production set. Time on set with the principal cast — including Barun Sobti and Ridhi Dogra. The production team, the blocking, the takes — a real working TV set.",
-        { type: "image", src: "/photo-starparivar-set.jpg", caption: "Star Parivaar — On Set · Iss Pyar Ko Kya Naam Doon" }),
+        { type: "image", src: "/photo-starparivar-set.jpg", caption: "Star Parivaar — On Set · Iss Pyar Ko Kya Naam Doon" },
+        [
+          { type: "image", src: "/photo-starparivar-set.jpg", caption: "On Set — Iss Pyar Ko Kya Naam Doon" },
+          { type: "image", src: "/photo-starparivar-barun.jpg", caption: "With Barun Sobti — On Set, Star Plus" },
+          { type: "image", src: "/photo-starparivar-ridhi.jpg", caption: "With Ridhi Dogra — On Set" },
+        ]),
       topic("Alt Balaji — Rhymes Series", "Lead in five children's rhymes.",
-        "Lead role across five short-form children's rhyme videos produced for Alt Balaji — the OTT streaming platform. Five separate pieces, five lead performances, distributed across a digital platform with national reach.",
-        { type: "youtube", src: PLAYLIST, caption: "Alt Balaji Rhymes Series — Lead in 5 Episodes" }),
+        "Lead role across five short-form children's rhyme videos produced for Alt Balaji — the OTT streaming platform. Five separate pieces, five lead performances, distributed across a digital platform with national reach.\n\nRhymes: Johny Johny Yes Papa · Chu Chu Wa · Twinkle Twinkle Little Star · Baa Baa Black Sheep · Jack and Jill.",
+        { type: "youtube", src: PLAYLIST, caption: "Alt Balaji Rhymes Series — Lead in 5 Episodes" },
+        [
+          { type: "image", src: "/tv-altbalaji.png", caption: "Alt Balaji Rhymes Series — On Screen Still" },
+          { type: "youtube", src: PLAYLIST, caption: "▶ Full Playlist — All 5 Rhymes" },
+        ]),
       topic("9XM — Independence Day Promo", "70th Independence Day promo for 9XM music channel.",
         "Featured in the 70th Independence Day promotional segment for 9XM — a major Hindi music and entertainment channel. Broadcast nationally during the Independence Day programming block.",
         { type: "youtube", src: PLAYLIST, caption: "9XM — 70th Independence Day Promo" }),
@@ -248,7 +302,15 @@ export const CLUSTERS: Cluster[] = [
         { type: "image", src: "/photo-korean-food.jpg", caption: "Korean Cuisine — Tteokbokki & Banchan, Montréal" }),
       topic("YMCA Youth Co-op", "VP of a youth cooperative in Montréal.",
         "Vice President of the YMCA Youth Co-op in Montréal — a student-run cooperative serving NDG, Westmount, and Côte Saint-Luc. Responsibilities include running general meetings, organizing community activities (bake-offs, outings, old age home visits), coordinating the marketing, HR, and finance committees, and representing the co-op at community events. Led a team across the full summer program.",
-        { type: "image", src: "/photo-ymca-event.jpg", caption: "YMCA Youth Co-op — Community Event, Summer 2025" }),
+        { type: "image", src: "/photo-ymca-event.jpg", caption: "YMCA Youth Co-op — Community Event, Summer 2025" },
+        [
+          { type: "image", src: "/photo-ymca-event.jpg", caption: "YMCA Youth Co-op — Community Event, Summer 2025" },
+          { type: "image", src: "/photo-ymca-office.jpg", caption: "YMCA Youth Co-op — Office & Team Meetings" },
+          { type: "image", src: "/photo-ymca-baking.jpg", caption: "YMCA Youth Co-op — Community Bake-Off" },
+          { type: "image", src: "/photo-ymca-grocery.jpg", caption: "YMCA Youth Co-op — Grocery Community Activity" },
+          { type: "image", src: "/photo-ymca-outing.jpg", caption: "YMCA Youth Co-op — Team Outing" },
+          { type: "image", src: "/photo-ymca-outreach.jpg", caption: "YMCA Youth Co-op — Community Outreach" },
+        ]),
       topic("Atwater Plant Internship", "Botany, fieldwork, and a team outside the lab.",
         "Summer internship at the Atwater plant site in Montréal, working alongside a team of young researchers. Field and outdoor work involving plant study and ecological survey. The SANAAQ Centre served as a base — collaboration across disciplines in an active outdoor environment.",
         { type: "image", src: "/photo-atwater-team.jpg", caption: "Atwater Internship Team — Field Day, Summer 2025" }),

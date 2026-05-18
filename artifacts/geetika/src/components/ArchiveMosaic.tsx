@@ -1,13 +1,10 @@
 import { useMemo, useState } from "react";
 import { ArrowUpRight, ChevronLeft, ChevronRight, ExternalLink, Play } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import type { TopicData } from "@/data/clusters";
+import type { EmbedItem, TopicData } from "@/data/clusters";
 
-type GalleryItem = NonNullable<TopicData["embed"]>;
-
-function getGallery(topic: TopicData): GalleryItem[] {
-  const embeds = (topic as TopicData & { gallery?: GalleryItem[] }).gallery;
-  return embeds?.length ? embeds : topic.embed ? [topic.embed] : [];
+function getGallery(topic: TopicData): EmbedItem[] {
+  return topic.gallery?.length ? topic.gallery : topic.embed ? [topic.embed] : [];
 }
 
 // We use a 6-column grid (LCM of 2 and 3) so spans are always whole integers:
