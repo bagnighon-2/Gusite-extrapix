@@ -5,17 +5,14 @@ import heroPortrait from "@/assets/hero-portrait.jpg";
 import atmosNotebook from "@/assets/atmos-notebook.jpg";
 import atmosTelescope from "@/assets/atmos-telescope.jpg";
 import atmosMusic from "@/assets/atmos-music.jpg";
-import textureCosmos from "@/assets/texture-cosmos.jpg";
 import texturePaper from "@/assets/texture-paper.jpg";
 
 function clamp(v: number, lo: number, hi: number) { return Math.max(lo, Math.min(hi, v)); }
 function lerp(a: number, b: number, t: number) { return a + (b - a) * clamp(t, 0, 1); }
 function easeOut(t: number) { return 1 - Math.pow(1 - clamp(t, 0, 1), 3); }
-function easeInOut(t: number) { const c = clamp(t, 0, 1); return c < 0.5 ? 2 * c * c : 1 - Math.pow(-2 * c + 2, 2) / 2; }
 
 const EXPAND_END = 0.12;
 const ESSAY_END = 0.88;
-const BUFFER_END = 0.90;
 
 const LIGHTBOX_CARDS = [
   {
@@ -43,6 +40,98 @@ const LIGHTBOX_CARDS = [
     detail: `The first time I held a drill during FRC build season, I was terrified. Six weeks to design, fabricate, wire, and programme a competition robot from a kit of parts and a game manual — that is the premise of FIRST Robotics, and it is one of the most demanding creative environments I have ever entered.\n\nTeam 7700 changed how I think about making things. The build season is a compressed version of every engineering project that exists: the initial excitement of the design phase, the brutal middle weeks when nothing works as specified, the integration hell when subsystems that tested fine individually refuse to cooperate, and then — if you have done the work — the game-day clarity when the machine does what you built it to do.\n\nI learned Onshape and SolidWorks for CAD, gained hands-on experience with fabrication (metal, plastic, pneumatics, wiring), and contributed to the programming side using Java and later Python. But the most important thing I learned on the team was not any particular tool — it was how to debug a system whose components you do not fully understand, under time pressure, with imperfect information.\n\nThat skill — systematic debugging of complex, partially-opaque systems — is the most transferable thing I own. I apply it when I am writing code, when I am revising a chapter of my novel, when I am preparing for a physics exam. Every domain I work in is, at some level, a system. The engineering mindset is the practice of engaging those systems honestly: defining inputs and outputs, isolating variables, testing assumptions one at a time.\n\nThis site is also a build. Every component, every data structure, every animation you see was designed and implemented by me. Building the dossier was itself a proof of concept: that I could ship something complete, functional, and genuinely representative of who I am.`,
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Static lightbox card — no entrance animation, plain in-flow card
+// ---------------------------------------------------------------------------
+function LightboxCard({ card, index }: { card: typeof LIGHTBOX_CARDS[0]; index: number }) {
+  const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <>
+      <div
+        onClick={() => setOpen(true)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          flex: "1 1 0",
+          minWidth: 0,
+          cursor: "pointer",
+          borderRadius: "16px",
+          overflow: "hidden",
+          background: "hsl(220 32% 7%)",
+          border: `1px solid ${card.accent}${hovered ? "55" : "28"}`,
+          boxShadow: hovered
+            ? `0 20px 48px -16px hsl(220 90% 3% / 0.55), 0 0 0 1.5px ${card.accent}33`
+            : `0 8px 24px -12px hsl(220 90% 3% / 0.28)`,
+          aspectRatio: "4/5",
+          position: "relative",
+          transition: "transform 280ms cubic-bezier(0.22,1,0.36,1), box-shadow 280ms ease, border-color 200ms ease",
+          transform: hovered ? "translateY(-4px) scale(1.025)" : "translateY(0) scale(1)",
+          willChange: "transform",
+        }}
+      >
+        <img
+          src={card.photo}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.07] grayscale pointer-events-none"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent 0 3px, hsl(220 50% 100%/0.006) 3px 4px)" }}
+        />
+        <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-5">
+          <div className="flex items-center justify-between mb-auto">
+            <span style={{ fontFamily: "ui-monospace, monospace", fontSize: "7.5px", letterSpacing: "0.3em", textTransform: "uppercase", color: `${card.accent}88` }}>§ 0{index + 1}</span>
+            {hovered && (
+              <span style={{ fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.2em", textTransform: "uppercase", color: "hsl(220 15% 55%)" }}>open →</span>
+            )}
+          </div>
+          <div style={{ marginTop: "auto" }}>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(16px,1.6vw,22px)", fontWeight: 600, lineHeight: 1.1, color: "hsl(38 30% 90%)", marginBottom: "0.5rem" }}>{card.label}</h3>
+            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(12px,0.9vw,14px)", fontStyle: "italic", color: "hsl(38 15% 60%)", lineHeight: 1.4 }}>{card.blurb}</p>
+          </div>
+        </div>
+        {hovered && (
+          <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 50% 100%, ${card.accent}12 0%, transparent 70%)`, pointerEvents: "none" }} />
+        )}
+      </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-xl bg-[hsl(220_30%_8%)] border border-border text-paper p-0 overflow-hidden">
+          <div className="relative">
+            <div className="relative h-32 overflow-hidden">
+              <img src={card.photo} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[hsl(220_30%_8%)]" />
+            </div>
+            <div className="p-6 md:p-8 -mt-8 relative">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="font-mono uppercase tracking-[0.3em] text-gold/55" style={{ fontSize: "8px" }}>§ 0{index + 1}</span>
+                <div className="flex-1 h-px bg-border/35" />
+              </div>
+              <DialogTitle style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(18px, 2.5vw, 26px)", fontWeight: 600, color: "hsl(38 40% 92%)", lineHeight: 1.1, marginBottom: "0.35rem" }}>{card.label}</DialogTitle>
+              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "15px", fontStyle: "italic", color: "hsl(38 20% 58%)", marginBottom: "1.25rem" }}>{card.blurb}</p>
+              <div className="h-px bg-border/28 mb-5" />
+              <DialogDescription asChild>
+                <div style={{ maxHeight: "45vh", overflowY: "auto" }}>
+                  {card.detail.split("\n").map((para, i) => (
+                    <p key={i} style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "15.5px", lineHeight: 1.75, color: "hsl(220 15% 74%)", marginBottom: i < card.detail.split("\n").length - 1 ? "1rem" : "0" }}>{para}</p>
+                  ))}
+                </div>
+              </DialogDescription>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Essay helpers (used inside the scroll-driven profile section)
+// ---------------------------------------------------------------------------
 
 function EssayPhoto({ src, alt, caption, align = "right" }: { src: string; alt: string; caption: string; align?: "left" | "right" | "full" }) {
   if (align === "full") return (
@@ -101,7 +190,7 @@ function Essay() {
         </p>
       </section>
 
-      <EssayPhoto src={textureCosmos} alt="Deep cosmos" caption="The texture of deep time — and deep space" align="full" />
+      <EssayPhoto src={texturePaper} alt="Deep cosmos" caption="The texture of deep time — and deep space" align="full" />
 
       <section style={{ marginBottom: "2.5rem" }}>
         <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(13px,1.1vw,15px)", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(43 70% 58%)", marginBottom: "1rem", opacity: 0.85 }}>III. The Scientist's Mind</h3>
@@ -132,7 +221,7 @@ function Essay() {
       </section>
 
       <section style={{ marginBottom: "2.5rem" }}>
-        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(13px,1.1vw,15px)", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(43 70% 58%)", marginBottom: "1rem", opacity: 0.85 }}>V. Robotics & Engineering</h3>
+        <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(13px,1.1vw,15px)", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(43 70% 58%)", marginBottom: "1rem", opacity: 0.85 }}>V. Robotics &amp; Engineering</h3>
         <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(15px,1.25vw,17px)", lineHeight: 1.82, color: "hsl(220 15% 78%)", marginBottom: "1rem" }}>
           The first time I held a drill during FRC build season, I was terrified — not of the drill, but of building something that would have to work in front of people. Six weeks to design, fabricate, wire, and programme a competition robot from a kit of parts and a game manual. That is the premise of FIRST Robotics, and it is one of the most demanding creative environments I have entered.
         </p>
@@ -146,7 +235,7 @@ function Essay() {
 
       <section style={{ marginBottom: "1rem" }}>
         <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(13px,1.1vw,15px)", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(43 70% 58%)", marginBottom: "1rem", opacity: 0.85 }}>VI. What I Am Building</h3>
-        <EssayPhoto src={texturePaper} alt="Paper and process" caption="Every claim has evidence here" align="right" />
+        <EssayPhoto src={heroPortrait} alt="Paper and process" caption="Every claim has evidence here" align="right" />
         <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(15px,1.25vw,17px)", lineHeight: 1.82, color: "hsl(220 15% 78%)", marginBottom: "1rem" }}>
           This site is an artifact. It is not a portfolio in the conventional sense — a curated highlights reel arranged to impress a particular audience. It is a working dossier: every claim backed by evidence, every skill accompanied by a receipt, every curiosity documented in the process of its exploration.
         </p>
@@ -164,90 +253,11 @@ function Essay() {
   );
 }
 
-function LightboxCard({ card, index, floatProgress }: { card: typeof LIGHTBOX_CARDS[0]; index: number; floatProgress: number }) {
-  const [open, setOpen] = useState(false);
-  const [hovered, setHovered] = useState(false);
+// ---------------------------------------------------------------------------
+// Main export — scroll-driven profile section + static cards below
+// ---------------------------------------------------------------------------
 
-  const stagger = index * 0.18;
-  const enterT = easeOut(clamp((floatProgress - stagger) / 0.4, 0, 1));
-  const cardOpacity = enterT;
-  const cardY = lerp(70, 0, enterT);
-  const cardScale = hovered ? 1.045 : lerp(0.96, 1, enterT);
-  const shadowIntensity = hovered ? 0.55 : lerp(0.1, 0.28, enterT);
-
-  return (
-    <>
-      <div
-        onClick={() => enterT > 0.5 && setOpen(true)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          flex: "1 1 0",
-          minWidth: 0,
-          opacity: cardOpacity,
-          transform: `translateY(${cardY}px) scale(${cardScale})`,
-          transition: "transform 280ms cubic-bezier(0.22,1,0.36,1), box-shadow 280ms ease",
-          cursor: enterT > 0.5 ? "pointer" : "default",
-          borderRadius: "16px",
-          overflow: "hidden",
-          background: "hsl(220 32% 7%)",
-          border: `1px solid ${card.accent}${hovered ? "55" : "28"}`,
-          boxShadow: `0 ${Math.round(shadowIntensity * 40)}px ${Math.round(shadowIntensity * 80)}px -24px hsl(220 90% 3% / ${shadowIntensity}), ${hovered ? `0 0 0 1.5px ${card.accent}33` : "none"}`,
-          aspectRatio: "4/5",
-          position: "relative",
-          willChange: "transform",
-        }}
-      >
-        <img src={card.photo} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-[0.07] grayscale pointer-events-none" />
-        <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent 0 3px, hsl(220 50% 100%/0.006) 3px 4px)" }} />
-        <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-5">
-          <div className="flex items-center justify-between mb-auto">
-            <span style={{ fontFamily: "ui-monospace, monospace", fontSize: "7.5px", letterSpacing: "0.3em", textTransform: "uppercase", color: `${card.accent}88` }}>§ 0{index + 1}</span>
-            {hovered && (
-              <span style={{ fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.2em", textTransform: "uppercase", color: "hsl(220 15% 55%)" }}>open →</span>
-            )}
-          </div>
-          <div style={{ marginTop: "auto" }}>
-            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(16px,1.6vw,22px)", fontWeight: 600, lineHeight: 1.1, color: "hsl(38 30% 90%)", marginBottom: "0.5rem" }}>{card.label}</h3>
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(12px,0.9vw,14px)", fontStyle: "italic", color: "hsl(38 15% 60%)", lineHeight: 1.4 }}>{card.blurb}</p>
-          </div>
-        </div>
-        {hovered && (
-          <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse at 50% 100%, ${card.accent}12 0%, transparent 70%)`, pointerEvents: "none", transition: "opacity 200ms ease" }} />
-        )}
-      </div>
-
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-xl bg-[hsl(220_30%_8%)] border border-border text-paper p-0 overflow-hidden">
-          <div className="relative">
-            <div className="relative h-32 overflow-hidden">
-              <img src={card.photo} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[hsl(220_30%_8%)]" />
-            </div>
-            <div className="p-6 md:p-8 -mt-8 relative">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="font-mono uppercase tracking-[0.3em] text-gold/55" style={{ fontSize: "8px" }}>§ 0{index + 1}</span>
-                <div className="flex-1 h-px bg-border/35" />
-              </div>
-              <DialogTitle style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(18px, 2.5vw, 26px)", fontWeight: 600, color: "hsl(38 40% 92%)", lineHeight: 1.1, marginBottom: "0.35rem" }}>{card.label}</DialogTitle>
-              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "15px", fontStyle: "italic", color: "hsl(38 20% 58%)", marginBottom: "1.25rem" }}>{card.blurb}</p>
-              <div className="h-px bg-border/28 mb-5" />
-              <DialogDescription asChild>
-                <div style={{ maxHeight: "45vh", overflowY: "auto" }}>
-                  {card.detail.split("\n").map((para, i) => (
-                    <p key={i} style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "15.5px", lineHeight: 1.75, color: "hsl(220 15% 74%)", marginBottom: i < card.detail.split("\n").length - 1 ? "1rem" : "0" }}>{para}</p>
-                  ))}
-                </div>
-              </DialogDescription>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
-}
-
-export function AboutCardStack({ topics }: { topics: TopicData[] }) {
+export function AboutCardStack({ topics: _topics }: { topics: TopicData[] }) {
   const shellRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
   const [vw, setVw] = useState(typeof window !== "undefined" ? window.innerWidth : 1280);
@@ -287,141 +297,155 @@ export function AboutCardStack({ topics }: { topics: TopicData[] }) {
 
   const essayPhaseT = clamp((t - EXPAND_END) / Math.max(0.001, ESSAY_END - EXPAND_END), 0, 1);
 
-  const floatProgress = clamp((t - BUFFER_END) / Math.max(0.001, 1 - BUFFER_END), 0, 1);
-  const cardsVisible = t > BUFFER_END - 0.02;
-
   const headerOpacity = clamp(1 - (expandT * 3), 0, 1);
 
   return (
-    <section ref={shellRef} className="relative w-full" style={{ height: "350vh" }}>
-      <div className="sticky top-0 h-screen overflow-hidden" style={{ background: "hsl(220 30% 5%)" }}>
+    <>
+      {/* Scroll-driven profile card section */}
+      <section ref={shellRef} className="relative w-full" style={{ height: "350vh" }}>
+        <div className="sticky top-0 h-screen overflow-hidden" style={{ background: "hsl(220 30% 5%)" }}>
 
-        {expandT < 0.95 && (
-          <div
-            style={{
-              position: "absolute",
-              top: 0, left: 0, right: 0,
-              padding: "5rem 2rem 0",
-              zIndex: 0,
-              opacity: headerOpacity,
-              pointerEvents: "none",
-            }}
-          >
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(13px,1vw,15px)", fontStyle: "italic", color: "hsl(220 15% 45%)", textAlign: "center" }}>
-              Scroll to read the essay ↓
-            </p>
-          </div>
-        )}
-
-        <div
-          style={{
-            position: "absolute",
-            left: `${cardLeft}px`,
-            top: `${cardTop}px`,
-            width: `${cardW}px`,
-            height: `${cardH}px`,
-            borderRadius: `${cardRadius}px`,
-            background: "hsl(220 28% 6.5%)",
-            border: `1px solid hsl(43 60% 50% / ${lerp(0.18, 0.12, expandT)})`,
-            boxShadow: `0 ${Math.round(lerp(8, 40, expandT))}px ${Math.round(lerp(24, 80, expandT))}px -${Math.round(lerp(8, 20, expandT))}px hsl(220 90% 2% / 0.7)`,
-            overflow: "hidden",
-            transition: "border-color 200ms ease",
-            willChange: "left, top, width, height",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: 1 - contentOpacity,
-              pointerEvents: "none",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "0.75rem",
-              padding: "1.5rem",
-            }}
-          >
-            <div style={{ opacity: initialLabelOpacity }}>
-              <div style={{ fontFamily: "ui-monospace, monospace", fontSize: "8px", letterSpacing: "0.35em", textTransform: "uppercase", color: "hsl(43 70% 55% / 0.6)", textAlign: "center", marginBottom: "0.6rem" }}>§ 01 · Personal Profile</div>
-              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 600, color: "hsl(38 35% 90%)", textAlign: "center", lineHeight: 1.1 }}>Geetika Gehlot</h2>
-              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(12px, 1vw, 14px)", fontStyle: "italic", color: "hsl(220 15% 55%)", textAlign: "center", marginTop: "0.4rem" }}>Montréal · India-born · Multidisciplinary</p>
+          {expandT < 0.95 && (
+            <div
+              style={{
+                position: "absolute",
+                top: 0, left: 0, right: 0,
+                padding: "5rem 2rem 0",
+                zIndex: 0,
+                opacity: headerOpacity,
+                pointerEvents: "none",
+              }}
+            >
+              <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(13px,1vw,15px)", fontStyle: "italic", color: "hsl(220 15% 45%)", textAlign: "center" }}>
+                Scroll to read the essay ↓
+              </p>
             </div>
-          </div>
+          )}
 
-          {contentVisible && (
+          <div
+            style={{
+              position: "absolute",
+              left: `${cardLeft}px`,
+              top: `${cardTop}px`,
+              width: `${cardW}px`,
+              height: `${cardH}px`,
+              borderRadius: `${cardRadius}px`,
+              background: "hsl(220 28% 6.5%)",
+              border: `1px solid hsl(43 60% 50% / ${lerp(0.18, 0.12, expandT)})`,
+              boxShadow: `0 ${Math.round(lerp(8, 40, expandT))}px ${Math.round(lerp(24, 80, expandT))}px -${Math.round(lerp(8, 20, expandT))}px hsl(220 90% 2% / 0.7)`,
+              overflow: "hidden",
+              transition: "border-color 200ms ease",
+              willChange: "left, top, width, height",
+            }}
+          >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                opacity: contentOpacity,
+                opacity: 1 - contentOpacity,
+                pointerEvents: "none",
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "0.75rem",
+                padding: "1.5rem",
               }}
             >
-              <div
-                style={{
-                  flexShrink: 0,
-                  padding: `${cardPad}px ${cardPad}px 0`,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <div style={{ width: 48, height: 48, borderRadius: 6, overflow: "hidden", border: "1px solid hsl(43 60% 50% / 0.2)", flexShrink: 0 }}>
-                  <img src={heroPortrait} alt="Geetika Gehlot" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-                <div>
-                  <div style={{ fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.32em", textTransform: "uppercase", color: "hsl(43 70% 55% / 0.65)", marginBottom: "0.25rem" }}>§ 01 · Personal Profile</div>
-                  <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(16px,1.8vw,22px)", fontWeight: 600, color: "hsl(38 35% 92%)", lineHeight: 1 }}>Geetika Gehlot</h2>
-                </div>
-                <div style={{ marginLeft: "auto", fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(220 15% 40%)" }}>Scroll ↓</div>
+              <div style={{ opacity: initialLabelOpacity }}>
+                <div style={{ fontFamily: "ui-monospace, monospace", fontSize: "8px", letterSpacing: "0.35em", textTransform: "uppercase", color: "hsl(43 70% 55% / 0.6)", textAlign: "center", marginBottom: "0.6rem" }}>§ 01 · Personal Profile</div>
+                <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 600, color: "hsl(38 35% 90%)", textAlign: "center", lineHeight: 1.1 }}>Geetika Gehlot</h2>
+                <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(12px, 1vw, 14px)", fontStyle: "italic", color: "hsl(220 15% 55%)", textAlign: "center", marginTop: "0.4rem" }}>Montréal · India-born · Multidisciplinary</p>
               </div>
+            </div>
 
-              <div style={{ height: 1, background: "hsl(43 60% 50% / 0.1)", margin: `${Math.round(cardPad * 0.6)}px ${cardPad}px` }} />
-
+            {contentVisible && (
               <div
                 style={{
-                  flex: 1,
-                  overflow: "hidden",
-                  padding: `0 ${cardPad}px ${cardPad}px`,
+                  position: "absolute",
+                  inset: 0,
+                  opacity: contentOpacity,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <div
                   style={{
-                    willChange: "transform",
-                    transform: `translateY(-${essayPhaseT * 100}%)`,
+                    flexShrink: 0,
+                    padding: `${cardPad}px ${cardPad}px 0`,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
                   }}
                 >
-                  <Essay />
+                  <div style={{ width: 48, height: 48, borderRadius: 6, overflow: "hidden", border: "1px solid hsl(43 60% 50% / 0.2)", flexShrink: 0 }}>
+                    <img src={heroPortrait} alt="Geetika Gehlot" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.32em", textTransform: "uppercase", color: "hsl(43 70% 55% / 0.65)", marginBottom: "0.25rem" }}>§ 01 · Personal Profile</div>
+                    <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(16px,1.8vw,22px)", fontWeight: 600, color: "hsl(38 35% 92%)", lineHeight: 1 }}>Geetika Gehlot</h2>
+                  </div>
+                  <div style={{ marginLeft: "auto", fontFamily: "ui-monospace, monospace", fontSize: "7px", letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(220 15% 40%)" }}>Scroll ↓</div>
+                </div>
+
+                <div style={{ height: 1, background: "hsl(43 60% 50% / 0.1)", margin: `${Math.round(cardPad * 0.6)}px ${cardPad}px` }} />
+
+                <div
+                  style={{
+                    flex: 1,
+                    overflow: "hidden",
+                    padding: `0 ${cardPad}px ${cardPad}px`,
+                  }}
+                >
+                  <div
+                    style={{
+                      willChange: "transform",
+                      transform: `translateY(-${essayPhaseT * 100}%)`,
+                    }}
+                  >
+                    <Essay />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-
-        {cardsVisible && (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: "0 clamp(16px, 4vw, 64px) clamp(32px, 5vh, 72px)",
-              display: "flex",
-              gap: "clamp(10px, 1.5vw, 20px)",
-              alignItems: "flex-end",
-              zIndex: 10,
-              pointerEvents: floatProgress > 0.1 ? "auto" : "none",
-            }}
-          >
-            {LIGHTBOX_CARDS.map((card, i) => (
-              <LightboxCard key={card.slug} card={card} index={i} floatProgress={floatProgress} />
-            ))}
+            )}
           </div>
-        )}
+        </div>
+      </section>
+
+      {/* Static facet cards — always visible, no animation, flush below the essay */}
+      <div
+        style={{
+          background: "hsl(220 30% 5%)",
+          padding: "clamp(24px, 4vw, 56px) clamp(16px, 5vw, 72px) clamp(40px, 6vw, 80px)",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "ui-monospace, monospace",
+            fontSize: "9px",
+            letterSpacing: "0.32em",
+            textTransform: "uppercase",
+            color: "hsl(43 70% 55% / 0.5)",
+            marginBottom: "1.25rem",
+          }}
+        >
+          § 01 · Three Facets
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "clamp(10px, 1.5vw, 20px)",
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          {LIGHTBOX_CARDS.map((card, i) => (
+            <div key={card.slug} style={{ flex: "1 1 200px", minWidth: "180px", maxWidth: "360px" }}>
+              <LightboxCard card={card} index={i} />
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </>
   );
 }

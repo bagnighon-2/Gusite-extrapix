@@ -19,6 +19,55 @@ function pickImage(topic: TopicData, index: number): string {
   return BG_POOL[index % BG_POOL.length];
 }
 
+// ---------------------------------------------------------------------------
+// Row-filling layout algorithm
+// Assigns col-spans so every row sums to exactly `cols`, with no partial rows
+// and no random gaps. Each item gets exactly one fixed row height.
+// ---------------------------------------------------------------------------
+
+const ROW_PATTERNS: Record<number, number[][]> = {
+  2: [[1, 1], [2]],
+  3: [[1, 1, 1], [2, 1], [1, 2]],
+  4: [[1, 1, 1, 1], [2, 2], [2, 1, 1], [1, 1, 2], [1, 2, 1]],
+};
+
+function fillPartialRow(count: number, cols: number): number[] {
+  if (count === 0) return [];
+  if (count === 1) return [cols];
+  const base = Math.floor(cols / count);
+  const extras = cols % count;
+  return Array.from({ length: count }, (_, i) => base + (i < extras ? 1 : 0));
+}
+
+function rowFillSpans(count: number, cols: number, seed: number): number[] {
+  if (count === 0) return [];
+  const ps = ROW_PATTERNS[cols] ?? [Array(cols).fill(1) as number[]];
+  const spans: number[] = [];
+  let i = 0;
+  let patIdx = seed;
+
+  while (i < count) {
+    const remaining = count - i;
+    // Only use patterns whose item-count fits the remaining items
+    const fitting = ps
+      .filter((p) => p.length <= remaining)
+      .sort((a, b) => b.length - a.length); // prefer patterns that consume more items
+
+    if (fitting.length > 0) {
+      const pat = fitting[patIdx % fitting.length];
+      spans.push(...pat);
+      i += pat.length;
+    } else {
+      // Last row: stretch items to fill remaining columns
+      spans.push(...fillPartialRow(remaining, cols));
+      break;
+    }
+    patIdx++;
+  }
+
+  return spans;
+}
+
 function ArchiveTile({ topic, index, span }: { topic: TopicData; index: number; span: string }) {
   const [open, setOpen] = useState(false);
   const num = String(index + 1).padStart(2, "0");
@@ -30,7 +79,7 @@ function ArchiveTile({ topic, index, span }: { topic: TopicData; index: number; 
         type="button"
         onClick={() => setOpen(true)}
         className={`fancy-tile group/tile relative ${span} overflow-hidden bg-paper border border-border hover:bg-navy-deep hover:text-paper-contrast transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-gold fibers stipple text-left`}
-        style={{ minHeight: "160px" }}
+        style={{ height: "160px" }}
       >
         <div className="absolute inset-0 opacity-0 group-hover/tile:opacity-100 transition-opacity duration-500">
           <img src={img} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" />
@@ -83,32 +132,26 @@ function ArchiveTile({ topic, index, span }: { topic: TopicData; index: number; 
   );
 }
 
-const SPANS_SM = ["col-span-2", "col-span-1", "col-span-1", "col-span-2", "col-span-1", "col-span-1", "col-span-2"];
-const SPANS_LG = ["col-span-2", "col-span-1", "col-span-1", "col-span-2", "col-span-1", "col-span-1", "col-span-1", "col-span-2", "col-span-1", "col-span-2", "col-span-1", "col-span-1"];
-
-function shuffleSpans(index: number, slug: string, total: number) {
-  const hash = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-  const smPool = ["col-span-1", "col-span-1", "col-span-2", "col-span-2", "col-span-1", "col-span-1"];
-  const lgPool = ["col-span-1", "col-span-1", "col-span-2", "col-span-1", "col-span-2", "col-span-1", "col-span-1", "col-span-2"];
-  const sm = smPool[(index + hash) % smPool.length];
-  const lg = lgPool[(index + hash) % lgPool.length];
-  // Last items: force smaller spans so dense flow can fill holes
-  if (index >= total - 2) {
-    return { sm: "col-span-1", lg: "col-span-1" };
-  }
-  return { sm, lg };
-}
-
 export function ArchiveMosaic({ topics }: { topics: TopicData[] }) {
+  const count = topics.length;
+
+  // Compute spans per breakpoint — rows always sum to the column count,
+  // so the grid forms a perfect filled rectangle with no gaps.
+  const smSpans = rowFillSpans(count, 2, 0);
+  const mdSpans = rowFillSpans(count, 3, 1);
+  const lgSpans = rowFillSpans(count, 4, 2);
+
   return (
     <section className="container pb-12">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-3.5">
-        {topics.map((topic, i) => {
-          const { sm, lg } = shuffleSpans(i, topic.slug, topics.length);
-          return (
-            <ArchiveTile key={topic.slug} topic={topic} index={i} span={`${sm} md:${lg}`} />
-          );
-        })}
+        {topics.map((topic, i) => (
+          <ArchiveTile
+            key={topic.slug}
+            topic={topic}
+            index={i}
+            span={`col-span-${smSpans[i]} md:col-span-${mdSpans[i]} lg:col-span-${lgSpans[i]}`}
+          />
+        ))}
       </div>
     </section>
   );
