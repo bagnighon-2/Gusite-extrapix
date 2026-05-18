@@ -124,7 +124,6 @@ const Index = () => {
     <PageShell>
       {/* HERO — fullscreen navigable slideshow */}
       <HeroSlideshow slides={HERO_SLIDES} />
-
       {/* MANIFESTO — layered: paper bg + drifting notebook + telescope corner + crumpled-paper veil */}
       <section
         id="after-hero"
@@ -160,11 +159,7 @@ const Index = () => {
               <p
                 className="font-display text-2xl md:text-3xl lg:text-4xl text-ink leading-[1.05] text-balance drop-cap"
                 data-reveal
-              >
-                This is not a résumé. It is a working dossier — equal parts laboratory
-                notebook, gallery catalogue, and founder's manifesto. Every page has
-                layers, sublayers, evidence. Every claim is meant to be examined.
-              </p>
+              >Geetika</p>
               <div className="rule-double my-8 max-w-xs" data-reveal data-reveal-delay="120" />
               <p
                 className="font-accent text-lg md:text-xl text-ink-soft leading-relaxed"
@@ -180,13 +175,11 @@ const Index = () => {
           </div>
         </div>
       </section>
-
       <div data-reveal>
         <PullQuote attr="The operating principle">
           Curiosity is not my hobby. It is my operating system.
         </PullQuote>
       </div>
-
       {/* SKILLS TOOLKIT — layered telescope + cosmos veil + scanlines */}
       <section className="relative py-10 md:py-14 overflow-hidden scanlines film-grain dust weave-soft stipple">
         <img
@@ -234,7 +227,6 @@ const Index = () => {
           </ul>
         </div>
       </section>
-
       {/* FEATURED HIGHLIGHTS BENTO — cosmos bg + crumpled-paper field + drifting notebook */}
       <section className="relative py-10 md:py-14 overflow-hidden crumpled-paper film-grain leak marble fibers">
         <img
@@ -266,7 +258,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
       {/* TRIPTYCH — three layered plates */}
       <section className="container py-8 md:py-10">
         <div className="grid md:grid-cols-3 gap-2">
@@ -300,7 +291,6 @@ const Index = () => {
           ))}
         </div>
       </section>
-
       {/* RANDOM WINS / CURIOSITIES TEASER — paper texture wash + crinkle */}
       <section className="relative py-10 md:py-14 overflow-hidden crinkle film-grain dust linen parchment weave-soft">
         <img
@@ -330,7 +320,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
       {/* GRAND GROUPS — index, layered music plate */}
       <section className="relative py-10 md:py-16 overflow-hidden film-grain dust crumpled-paper marble fibers">
         <img
@@ -386,7 +375,6 @@ const Index = () => {
           </ol>
         </div>
       </section>
-
       {/* CORE TRAITS BAND — layered cosmos + telescope + crumpled-paper veil */}
       <section className="force-light bg-navy-deep text-paper py-14 md:py-20 relative overflow-hidden grain crumpled-paper film-grain leak marble stipple">
         <img
