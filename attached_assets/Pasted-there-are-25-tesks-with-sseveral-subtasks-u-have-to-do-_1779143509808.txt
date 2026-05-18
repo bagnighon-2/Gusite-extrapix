@@ -1,0 +1,28 @@
+there are 25+ tesks with sseveral subtasks u have to do now in one prompt. so be careful to recheck and test and search for errors after every 1 of the 25 steps u do. be very careful.
+
+make sure the collages and photos can be seen in the boxes before lightbox is opened, in the tiles of pages work, academics etc.
+and dont put the tile number 01 02 03 assigned to the tile itself cus i wanna delete boxes by code later on,
+also the collage viewing version should also not crop video youtube link or photo,
+also there are some tiles that open lightboxes in the home page also, like frc team 7700 replace their images with the peek of collagges that represent the thing, also replace boxes with no photo video or embed like the novel cycle box with something else that has vid/photo/embed in home page tiles,
+do same for the belts medals and side quests tiles also like tennis and chess,
+same for the 3 facets cards below the about essay.
+plus ur freelance design photo u put is for the second prize i got for the tcs ion intelligem
+u made many such errors so please use metacognition and try to identify locate and observe if any errors and fix them.
+also remove all tiles that say log or growth or notes that dont have any photos or embed.
+plus, put the tiles that have no photos or embed in the last and the ones with something in the first order please!
+plus dissolve the performance portfolio and put the four videos/photos things in 4 separate lightboxes cus theyre different.
+i see youve repeated the same mistake of grouping unsimilar things everywhere so dissolve those groupings.
+allow the preview of inserted photos or videos to appear in the tiles as a peek before the lightboxes are even opened!
+make the lightbox much larger for the ones with image and smaller for the only text ones, put a sensor in the code that switches these modes in the lightbox if the thing has something in it or just text.
+dissolve childhood trophies and put every video or photo in it a separate respectful tile cus the shit has different stuff in it!
+remove blocks of these names: random wins,
+rename frc team 7700 tile in works page cus its engineering not that team only.
+also separate tile for davinci resolve, separate for fl studio, separate for djing,
+honestly if u have made groups of anything, also add ungrouped individual respectful tiles for those things
+also based on how many embeds each tile has, make the size as large so that the preview peek allows viewing without shortening or cropping, and make sure the tiles and the photos collage remain both, both remain in a gapless collage since the size issue.
+make sure the size change doesnt cause issues
+please see if it looks good with photos viewed like that and aesthetic and please please add some semi-transparent layer of color dark blue one on the peek.
+also in the home page slideshow, the details of the two texts Fashion and white text dont match so please help with that.
+also dont put my fashion pics in slideshow. choose the ones that are the most different like science, with acting with singing crazy kinds of combinations with respectful white and gold text that is lying on it on center left.
+plus navigation arrow is hiding the gold text.
+
