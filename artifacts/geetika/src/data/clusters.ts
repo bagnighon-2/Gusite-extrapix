@@ -386,8 +386,9 @@ export const CLUSTERS: Cluster[] = [
         "Visual artwork including painting and drawing using multiple mediums, oil, acrylic, watercolor, and mixed media. One such example of original works include a Saraswati composition and a landscape canvas, both created in 2020 & installed in the home mandir.",
         { type: "image", src: "/photo-mandir.jpg", caption: "Original Paintings, Home Mandir, Montréal 2025" }),
       topic("Embroidery & Henna", "Threads & Stains",
-        "Hand Henna & embroidery work with traditional and contemporary design approaches. Uses of meditative practices that doubles as aesthetic art."),
-      topic("Global Cuisine", "Trying every dish from everywhere.",
+        "Hand Henna & embroidery work with traditional and contemporary design approaches. Uses of meditative practices that doubles as aesthetic art.",
+        { type: "image", src: "/photo-henna.jpg", caption: "Henna artwork created by Geetika in 2025" }),
+        topic("Global Cuisine", "Trying every dish from everywhere.",
         "A personal project of intentional food exploration across cuisines. Korean tteokbokki with ramyeon and a full banchan spread, kimchi, gosari, daikon, and seaweed. The interest is anthropological: what a cuisine tells you about a culture is more than any textbook.",
         { type: "image", src: "/photo-korean-food.jpg", caption: "Korean Cuisine, Tteokbokki & Banchan, Montréal" }),
       /* ── Leadership ── */
@@ -438,8 +439,8 @@ export const CLUSTERS: Cluster[] = [
         "Group dance performance at the Gladrags Little Miss India competition, the finals stage, with the full lineup of finalists. A coordinated group performance as part of the pageant competition rounds.",
         { type: "youtube", src: YT("N0Bj1B2CkOM"), caption: "Gladrags Group Dance, Little Miss India Finals" }),
       /*, text-only, sorted to end, */
-      topic("Multimedia Production", "Edit, shoot, score.",
-        "Experience in video editing, audio production, graphic design, and content creation."),
+      topic("Multimedia Production", "Edit, shoot!",
+        "Experience in video editing, audio production, graphic design, and content creation. Fully fluent in DaVinci Resolve, FL Studio, etc."),
       topic("Tech Skills", "React, TypeScript, Python.",
         "Web development using React, TypeScript, and Python, alongside version control and standard development tools."),
       topic("Mentoring", "Passing on!",
@@ -456,16 +457,7 @@ export const CLUSTERS: Cluster[] = [
   /* ══════════════════════════════════════════════════════════
      04 · VAULT
      ══════════════════════════════════════════════════════════ */
-  {
-    num: "04", slug: "vault", label: "CV & Resume", icon: FileText,
-    tagline: "CV, certificates, transcripts, recognition, every receipt, open for inspection.",
-    topics: [
-      topic("Certificates", "Some of the uncountable certificates awarded",
-        "Academic certificates, Extracurricular recognitions"),
-      topic("Transcripts", "The academic record.",
-        "Official transcripts, grade reports, and standardized test scores."),
-    ],
-  },
+
 
   /* ══════════════════════════════════════════════════════════
      05 · CONTACT
