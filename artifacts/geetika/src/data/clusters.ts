@@ -58,7 +58,7 @@ export const CLUSTERS: Cluster[] = [
       topic("Born on Shivaratri", "A sacred night that became a birthday.",
         "Born on the night of Mahashivaratri, the great Hindu festival of Lord Shiva, one of the most spiritually significant nights in the Vedic calendar. The festival falls on the 14th night of the new moon during the lunar month of Phalguna. To be born on that night is considered deeply auspicious in Rajasthani and Hindu tradition. The Adiyogi, the first yogi, is worshipped on this day.",
         { type: "image", src: "/photo-shivaratri-adiyogi.jpg", caption: "Mahashivaratri, The Adiyogi, Festival Night" }),
-      topic("Self-Taught Astronomer", "Every constellation. Every blank space. A year of shooting stars.",
+      topic("Self-Taught Junior Astronomer", "Every constellation. Every blank space. A year of shooting stars.",
         "At age 14–15, decided to study astronomy entirely independently, no class, no teacher, no curriculum. Mapped every constellation visible in the northern hemisphere, studied the blank spaces between them, learned star positions, declinations, and how the sky rotates through the year.\n\nTracked meteor showers in advance and stayed up through the night to observe them, the Eta Aquarids, the Perseids, and others. Also tracked Comet 12P/Pons-Brooks through the constellation Taurus in April 2024, one of the brightest periodic comets, visible to the naked eye.",
         { type: "image", src: "/photo-moon-stargazing.jpg", caption: "Night Sky, Rooftop Stargazing Session" },
         [
@@ -289,6 +289,9 @@ export const CLUSTERS: Cluster[] = [
           { type: "image", src: "/photo-birthday-sister-party.jpg", caption: "Sister's Birthday Party, Organized & Hosted, Also Paid" },
         ]),
       /* ── Screen & Media ── */
+      topic("Embroidery & Henna", "Threads & Stains",
+      "Hand Henna & embroidery work with traditional and contemporary design approaches. Uses of meditative practices that doubles as aesthetic art.",
+        { type: "image", src: "/photo-henna.jpg", caption: "Henna artwork created by Geetika in 2025" }),
       topic("Child Artist Archive", "Years on screen, the full overview.",
         "Film and television work completed during childhood across multiple productions. Lead roles, supporting credits, voice work, and modelling across Indian national media. This is the overview; individual productions have their own entries below.",
         { type: "youtube", src: PLAYLIST, caption: "Child Artist Reel, Full Playlist" },
@@ -442,12 +445,10 @@ export const CLUSTERS: Cluster[] = [
         "Group dance performance at the Gladrags Little Miss India competition, the finals stage, with the full lineup of finalists. A coordinated group performance as part of the pageant competition rounds.",
         { type: "youtube", src: YT("N0Bj1B2CkOM"), caption: "Gladrags Group Dance, Little Miss India Finals" }),
       /*, text-only, sorted to end, */
-      topic("Multimedia Production", "Edit, shoot, score.",
-        "Experience in video editing, audio production, graphic design, and content creation."),
+      topic("Multimedia Production", "Edit, shoot!",
+        "Experience in video editing, audio production, graphic design, and content creation. Fully fluent in DaVinci Resolve, FL Studio, etc."),
       topic("Tech Skills", "React, TypeScript, Python.",
         "Web development using React, TypeScript, and Python, alongside version control and standard development tools."),
-      topic("Embroidery", "Thread as medium.",
-        "Hand embroidery work with traditional and contemporary design approaches. A meditative practice that doubles as visual art."),
       topic("Mentoring", "Passing it forward.",
         "Peer support in academic subjects, robotics, and music. Teaching is the fastest way to learn."),
       topic("Badminton & Table-Tennis", "Court sport, court discipline.",

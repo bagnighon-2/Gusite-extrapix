@@ -54,18 +54,19 @@ const HERO_SLIDES: Slide[] = [
 
 /* -------------------- SKILLS TOOLKIT -------------------- */
 const SKILLS: { icon: React.ComponentType<{ className?: string }>; label: string; level: string }[] = [
-  { icon: Atom,      label: "Physics",         level: "Self-taught + olympiad" },
-  { icon: Brain,     label: "Mathematics",     level: "AP track" },
+  { icon: Atom,      label: "Physics",         level: "Self-taught + Contact with highly deemed Professors" },
+  { icon: Brain,     label: "Olympiads",     level: "& AP exams" },
+
   { icon: Cpu,       label: "Robotics",        level: "FRC Team 7700" },
   { icon: Code2,     label: "Web + Code",      level: "React · TS · Python" },
-  { icon: PenTool,   label: "Writing",         level: "Novel cycle · podcast" },
+  { icon: PenTool,   label: "Authoring",         level: "Ongoing fiction novel series" },
   { icon: Music2,    label: "Hindustani Vocal", level: "Stage performer" },
   { icon: Mic2,      label: "Voice Acting",    level: "Child-artist credits" },
   { icon: Camera,    label: "Multimedia",      level: "Edit · shoot · score" },
-  { icon: Palette,   label: "Visual Art",      level: "Canvas · embroidery" },
+  { icon: Palette,   label: "Visual Art",      level: "Canvas, Henna, Rangoli, Embroidery" },
   { icon: Trophy,    label: "Strategy Games",  level: "Chess · badminton · TT" },
-  { icon: Languages, label: "Languages",       level: "EN · HI · FR" },
-  { icon: Wand2,     label: "Storyworlds",     level: "Worldbuilding craft" },
+  { icon: Languages, label: "Languages",       level: "EN · HI · FR · MW" },
+  { icon: Wand2,     label: "Screenwriting",     level: "Cinematic Screenwriting" },
 ];
 
 /* -------------------- FEATURED HIGHLIGHTS BENTO -------------------- */
