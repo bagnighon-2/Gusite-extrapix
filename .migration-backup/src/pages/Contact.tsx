@@ -88,7 +88,7 @@ function ContactBlock() {
           <span className="eyebrow">Message</span>
           <textarea value={message} onChange={(e) => setMessage(e.target.value)} maxLength={2000} required rows={6}
             className="mt-2 w-full bg-paper border border-border focus:border-gold outline-none px-3 py-2 font-accent text-base text-ink resize-y"
-            placeholder="Say hello, ask a question, or open a door." />
+            placeholder="Say hello, ask a question.." />
           <span className="block mt-1 font-mono text-[0.6rem] tracking-widest text-ink-soft text-right">{message.length}/2000</span>
         </label>
         <button type="submit" disabled={sending}

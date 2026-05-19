@@ -131,7 +131,7 @@ ABOUT → What I Am Building
 
 This site contains records of academic work, creative output, competition participation, and independent projects. Entries are organized across writing, robotics, music, research, visual art, and leadership activities, with supporting materials where available.
 ACADEMICS
-Education Timeline
+education
 
 Schooling began in India and continued in Canada after relocation in 2024. Current studies are based in Montréal within the Quebec secondary system. Academic focus includes mathematics, physics, chemistry, biology, computer science, languages, and humanities, alongside participation in advanced preparation programs.
 
