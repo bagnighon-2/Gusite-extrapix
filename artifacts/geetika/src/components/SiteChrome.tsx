@@ -174,7 +174,7 @@ export const SiteFooter = forwardRef<HTMLElement>((_, ref) => {
     <footer ref={ref} className="force-light bg-navy-deep text-paper relative overflow-hidden grain">
       <div className="container py-10 grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
-          <p className="label-gold mb-4">End</p>
+          <p className="label-gold mb-4">Colophon</p>
           <p className="font-display text-2xl text-balance leading-tight">
             Documenting the journey of Geetika through science, creativity and taking action!
           </p>

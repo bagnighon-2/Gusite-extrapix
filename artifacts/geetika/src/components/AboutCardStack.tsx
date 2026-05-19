@@ -192,6 +192,9 @@ function Essay() {
           Growing up between languages and cultures made me a better thinker. Not because I am confused about who I am, I am not, but because I learned early that every framework is a choice, not a fact. The way any given culture organises its assumptions is contingent, historical, revisable. That insight is the foundation of all critical thinking, and I received it before I could have articulated it, simply by being a person who had to navigate between worlds.
         </p>
       </section>
+
+      <EssayPhoto src={fashNavy} alt="Navy fashion portrait" caption="The discipline of deep time, and deep space" align="full" />
+
       <section style={{ marginBottom: "2.5rem" }}>
         <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(13px,1.1vw,15px)", fontWeight: 600, letterSpacing: "0.22em", textTransform: "uppercase", color: "hsl(43 70% 58%)", marginBottom: "1rem", opacity: 0.85 }}>III. The Scientist's Mind</h3>
         <EssayPhoto src={achCrown} alt="Crown portrait" caption="Observing, always observing" align="right" />

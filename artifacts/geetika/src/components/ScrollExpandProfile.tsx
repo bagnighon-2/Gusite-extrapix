@@ -366,6 +366,9 @@ function Essay() {
           emergence, and the uncomfortable zone where computation meets cognition.
         </p>
       </section>
+
+      <EssayPhoto src={fashNavy} alt="Navy fashion portrait" caption="The discipline of deep time" align="full" />
+
       <section className="essay-section mb-9">
         <h3 className="essay-heading">IV. The Creative Life</h3>
         <EssayPhoto src={achSinging} alt="Singing performance" caption="Riyaaz, daily practice in Hindustani vocal" align="left" />

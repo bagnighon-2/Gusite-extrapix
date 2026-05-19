@@ -47,6 +47,9 @@ export const CLUSTERS: Cluster[] = [
   },
   {
     num: "02", slug: "academics", label: "Academics, STEM & Research", icon: GraduationCap,
+    tagline: "Education timeline, exams, awards, physics, and research interests.",
+    topics: [
+      topic("Education Timeline", "Schools, moves, and academic chapters.", "From early schooling in India to the AP track in Montréal, every transition brought new challenges and new ways of thinking. The timeline maps the academic journey with grades, transitions, and key turning points."),
       topic("Subject Strengths", "Where the numbers back the curiosity.", "Mathematics, physics, and computer science form the core. But strengths aren't limited to STEM, writing, languages, and the humanities round out the picture. Each subject has evidence, not just claims."),
       topic("Awards Vault", "Every ribbon, every certificate.", "Academic competitions, olympiad placements, honor rolls, and subject awards, catalogued with context, not just titles. Each award tells a story about what was happening when it was earned."),
       topic("Growth Notes", "Where I struggled and what I learned.", "Not every subject came easy. Growth notes document the gaps, the comebacks, and the lessons that stuck. Honest self-assessment is more valuable than a perfect transcript."),

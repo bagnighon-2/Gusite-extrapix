@@ -265,7 +265,7 @@ export function FractalPage() {
 
 /* -------------------- Contact block -------------------- */
 
-const CONTACT_EMAIL = "geetikagehlot2009.com";
+const CONTACT_EMAIL = "geetika@example.com";
 
 function ContactBlock() {
   const [name, setName] = useState("");
@@ -289,8 +289,8 @@ function ContactBlock() {
 
   const channels: Array<{ icon: IconCmp; label: string; value: string; href?: string }> = [
     { icon: Mail, label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
-    { icon: Linkedin, label: "LinkedIn", value: "/in/geetika-gehlot", href: "https://www.linkedin.com/geetikagehlot" },
-    { icon: Github, label: "GitHub", value: "@geetika-gehlot", href: "https://github.com/geetikagehlot" },
+    { icon: Linkedin, label: "LinkedIn", value: "/in/geetika-gehlot", href: "https://www.linkedin.com/" },
+    { icon: Github, label: "GitHub", value: "@geetika", href: "https://github.com/" },
     { icon: MapPin, label: "Based in", value: "Montréal, QC" },
   ];
 
@@ -313,7 +313,7 @@ function ContactBlock() {
           <span className="eyebrow">Message</span>
           <textarea value={message} onChange={(e) => setMessage(e.target.value)} maxLength={2000} required rows={6}
             className="mt-2 w-full bg-paper border border-border focus:border-gold outline-none px-3 py-2 font-accent text-base text-ink resize-y"
-            placeholder="Say hello, ask a question.." />
+            placeholder="Say hello, ask a question, or open a door." />
           <span className="block mt-1 font-mono text-[0.6rem] tracking-widest text-ink-soft text-right">{message.length}/2000</span>
         </label>
         <button type="submit" disabled={sending}

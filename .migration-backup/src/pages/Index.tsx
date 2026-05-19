@@ -152,8 +152,8 @@ const Index = () => {
         <div className="container relative">
           <div className="grid md:grid-cols-12 gap-8 md:gap-10">
             <div className="md:col-span-3" data-reveal>
-              <p className="label-gold">00 · Hello</p>
-              <p className="eyebrow mt-3">Scroll down</p>
+              <p className="label-gold">§ 00 · Foreword</p>
+              <p className="eyebrow mt-3">Read aloud</p>
               <div className="rule-gold mt-5 max-w-[60%]" />
             </div>
             <div className="md:col-span-9 max-w-3xl">
@@ -161,96 +161,31 @@ const Index = () => {
                 className="font-display text-3xl md:text-5xl text-ink leading-[1.05] text-balance drop-cap"
                 data-reveal
               >
-              Born in India, raised through 
-              several cities & countries, 
-              Geetika has spent the last 17 years collecting 
-              & attempting to answer questions, </p>
+                This is not a résumé. It is a working dossier, equal parts laboratory
+                notebook, gallery catalogue, and founder's manifesto. Every page has
+                layers, sublayers, evidence. Every claim is meant to be examined.
+              </p>
               <div className="rule-double my-8 max-w-xs" data-reveal data-reveal-delay="120" />
               <p
                 className="font-accent text-xl md:text-2xl text-ink-soft leading-relaxed"
                 data-reveal
                 data-reveal-delay="200"
               >
-              and in the process, lies a unique journey.
+                I was born in India, raised between two continents, and I now write,
+                perform, code, and study physics from Montréal. I have spent the
+                last ten years collecting questions, this site is where I begin to
+                answer them, in public, with proof.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* GRAND GROUPS, index, layered music plate */}
-      <section className="relative py-16 md:py-24 overflow-hidden film-grain dust crumpled-paper marble fibers">
-        <img
-          src={atmosMusic}
-          alt=""
-          aria-hidden
-          className="absolute right-0 top-0 w-[40%] max-w-2xl h-[55%] object-cover opacity-20 grayscale pointer-events-none hidden md:block animate-float"
-        />
-        <img
-          src={texturePaper}
-          alt=""
-          aria-hidden
-          className="absolute -left-10 bottom-0 w-[30%] max-w-md h-[50%] object-cover opacity-15 mix-blend-multiply pointer-events-none hidden md:block"
-        />
-        <div className="container relative">
-          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap" data-reveal>
-            <div>
-              <p className="label-gold mb-3">§ 04 · The Archive</p>
-              <h2 className="display-xl text-3xl md:text-5xl text-ink">
-                Five pages, <span className="font-accent text-gold">one dossier.</span>
-              </h2>
-              <p className="mt-4 max-w-xl text-ink-soft text-sm leading-relaxed font-accent italic">
-                The five main pages: about, academics & research,
-                the works, the documents, and contact.
-              </p>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-5 gap-8">
-            {[
-              ["I", "About", "Me"],
-              ["II", "Academics", "& Excellences"],
-              ["III", "Works", "Projects & Extracurriculars"],
-              ["IV", "CV", "Resume & Documents"],
-              ["V", "Contact", "Get in Touch"],
-            ].map(([n, t, d], idx) => (
-              <div
-                key={t}
-                className="border-t border-gold/40 pt-4"
-                data-reveal
-                data-reveal-delay={String(idx * 100)}
-              >
-                <p className="font-mono text-xs text-gold tracking-widest">{n}</p>
-                <h3 className="font-display text-2xl mt-2">{t}</h3>
-                <p className="text-paper/70 text-base mt-3 leading-relaxed font-accent">{d}</p>
-              </div>
-            ))}
-          </div>
-          <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border" data-reveal>
-            {CLUSTERS.map((c) => {
-              const CI = c.icon;
-              return (
-                <li key={c.slug} className="bg-paper">
-                  <Link
-                    to={`/${c.slug}`}
-                    className="fancy-tile group/tile block p-6 h-full hover:bg-navy-deep hover:text-paper-contrast transition-all duration-500 relative overflow-hidden fibers stipple hover:-translate-y-1"
-                  >
-                    <div className="flex items-start justify-between mb-6">
-                      <CI className="w-5 h-5 text-gold" />
-                      <span className="font-mono text-[0.65rem] tracking-widest text-gold">{c.num}</span>
-                    </div>
-                    <h4 className="font-display text-xl md:text-2xl leading-snug mb-2">{c.label}</h4>
-                    <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-ink-soft group-hover/tile:text-paper-contrast-soft mt-2">
-                      {c.tagline}
-                    </p>
-                    <ArrowUpRight className="absolute right-4 bottom-4 w-4 h-4 text-ink-soft group-hover/tile:text-gold group-hover/tile:translate-x-1 group-hover/tile:-translate-y-1 transition-all duration-500" />
-                    <span className="absolute left-0 bottom-0 h-px w-0 bg-gold transition-all duration-700 group-hover/tile:w-full" />
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
-      </section>
+      <div data-reveal>
+        <PullQuote attr="The operating principle">
+          Curiosity is not my hobby. It is my operating system.
+        </PullQuote>
+      </div>
 
       {/* SKILLS TOOLKIT, layered telescope + cosmos veil + scanlines */}
       <section className="relative py-14 md:py-20 overflow-hidden scanlines film-grain dust weave-soft stipple">
@@ -271,11 +206,11 @@ const Index = () => {
             <div>
               <p className="label-gold mb-3">§ 01 · Toolkit</p>
               <h2 className="display-xl text-3xl md:text-5xl text-ink">
-                Few of the skills I bring <span className="font-accent text-gold">to the table.</span>
+                Skills I bring <span className="font-accent text-gold">to the table.</span>
               </h2>
             </div>
             <p className="max-w-md text-ink-soft text-sm leading-relaxed">
-                Not exhaustive; go to Pages: Works, Academics & CV for full list of Skills & Achievements
+              A working list, not a brag sheet. Each tool earns its place by what I've shipped, not what I've studied.
             </p>
           </div>
           <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-border border border-border">
@@ -323,7 +258,7 @@ const Index = () => {
               </h2>
             </div>
             <p className="max-w-md text-ink-soft text-sm leading-relaxed">
-              Hover & Click for more!
+              Hover for the elevator pitch. Click for the full story.
             </p>
           </div>
           <div data-reveal>
@@ -366,6 +301,103 @@ const Index = () => {
         </div>
       </section>
 
+      {/* GRAND GROUPS, index, layered music plate */}
+      <section className="relative py-16 md:py-24 overflow-hidden film-grain dust crumpled-paper marble fibers">
+        <img
+          src={atmosMusic}
+          alt=""
+          aria-hidden
+          className="absolute right-0 top-0 w-[40%] max-w-2xl h-[55%] object-cover opacity-20 grayscale pointer-events-none hidden md:block animate-float"
+        />
+        <img
+          src={texturePaper}
+          alt=""
+          aria-hidden
+          className="absolute -left-10 bottom-0 w-[30%] max-w-md h-[50%] object-cover opacity-15 mix-blend-multiply pointer-events-none hidden md:block"
+        />
+        <div className="container relative">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap" data-reveal>
+            <div>
+              <p className="label-gold mb-3">§ 04 · The Archive</p>
+              <h2 className="display-xl text-3xl md:text-5xl text-ink">
+                Five pages, <span className="font-accent text-gold">one dossier.</span>
+              </h2>
+              <p className="mt-4 max-w-xl text-ink-soft text-sm leading-relaxed font-accent italic">
+                The whole site lives across five pages, about, academics & research,
+                the merged works, the document vault, and a way to reach me. No grand
+                groupings, no fractal cul-de-sacs. Just five doors.
+              </p>
+            </div>
+          </div>
+
+          <ol className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border" data-reveal>
+            {CLUSTERS.map((c) => {
+              const CI = c.icon;
+              return (
+                <li key={c.slug} className="bg-paper">
+                  <Link
+                    to={`/${c.slug}`}
+                    className="fancy-tile group/tile block p-6 h-full hover:bg-navy-deep hover:text-paper-contrast transition-all duration-500 relative overflow-hidden fibers stipple hover:-translate-y-1"
+                  >
+                    <div className="flex items-start justify-between mb-6">
+                      <CI className="w-5 h-5 text-gold" />
+                      <span className="font-mono text-[0.65rem] tracking-widest text-gold">{c.num}</span>
+                    </div>
+                    <h4 className="font-display text-xl md:text-2xl leading-snug mb-2">{c.label}</h4>
+                    <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-ink-soft group-hover/tile:text-paper-contrast-soft mt-2">
+                      {c.tagline}
+                    </p>
+                    <ArrowUpRight className="absolute right-4 bottom-4 w-4 h-4 text-ink-soft group-hover/tile:text-gold group-hover/tile:translate-x-1 group-hover/tile:-translate-y-1 transition-all duration-500" />
+                    <span className="absolute left-0 bottom-0 h-px w-0 bg-gold transition-all duration-700 group-hover/tile:w-full" />
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* CORE TRAITS BAND, layered cosmos + telescope + crumpled-paper veil */}
+      <section className="force-light bg-navy-deep text-paper py-20 md:py-28 relative overflow-hidden grain crumpled-paper film-grain leak marble stipple">
+        <img
+          src={textureCosmos}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover opacity-40 animate-ken"
+        />
+        <img
+          src={atmosTelescope}
+          alt=""
+          aria-hidden
+          className="absolute -right-20 top-10 w-[35%] max-w-xl h-[70%] object-cover opacity-15 grayscale pointer-events-none hidden md:block animate-float"
+        />
+        <div className="container relative">
+          <p className="label-gold mb-6" data-reveal>§ 05 · Core Traits</p>
+          <h2 className="display-xl text-4xl md:text-6xl mb-12 max-w-3xl text-balance" data-reveal>
+            Five instincts <span className="font-accent text-gold">I trust</span> before any plan.
+          </h2>
+          <div className="grid md:grid-cols-5 gap-8">
+            {[
+              ["I", "Analytical Precision", "Numbers before opinions."],
+              ["II", "Creative Intelligence", "Form follows imagination."],
+              ["III", "Leadership", "Quiet, by example."],
+              ["IV", "Relentless Work Ethic", "Hours compound."],
+              ["V", "Cross-disciplinary Thinking", "Edges are where ideas meet."],
+            ].map(([n, t, d], idx) => (
+              <div
+                key={t}
+                className="border-t border-gold/40 pt-4"
+                data-reveal
+                data-reveal-delay={String(idx * 100)}
+              >
+                <p className="font-mono text-xs text-gold tracking-widest">{n}</p>
+                <h3 className="font-display text-2xl mt-2">{t}</h3>
+                <p className="text-paper/70 text-base mt-3 leading-relaxed font-accent">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </PageShell>
   );
 };
